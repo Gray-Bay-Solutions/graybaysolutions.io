@@ -3,8 +3,8 @@ import { supabase } from '@/lib/supabase'
 import { z } from 'zod'
 
 // Rate limiting configuration
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000 // 1 hour
-const MAX_REQUESTS = 5
+// const RATE_LIMIT_WINDOW = 60 * 60 * 1000 // 1 hour
+// const MAX_REQUESTS = 5
 
 const formSchema = z.object({
   name: z.string().min(2),

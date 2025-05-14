@@ -10,8 +10,10 @@ module.exports = {
       colors: {
         primary: {
           black: '#000000',
-          gray: '#808080',
+          gray: '#2e3440',
+          'space-gray': '#343a40',
           orange: '#FFA500',
+          sunset: '#ff7e5f',
         }
       },
       fontFamily: {
@@ -27,6 +29,15 @@ module.exports = {
           'sans-serif'
         ],
       },
+      animation: {
+        'float': 'floating 6s ease-in-out infinite',
+      },
+      keyframes: {
+        floating: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        }
+      }
     },
   },
   plugins: [],

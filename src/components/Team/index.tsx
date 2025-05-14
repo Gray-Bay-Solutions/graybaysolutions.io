@@ -22,26 +22,26 @@ interface TeamMember {
 
 const team: TeamMember[] = [
   {
-    name: "Grayson Crozier",
-    role: "Chief Technology Officer",
-    image: "/team/gray.jpg",
-    bio: "15+ years of experience in software architecture and AI development. Previously led engineering at major tech companies.",
+    name: "Bailey Rosen",
+    role: "Co-Founder/CEO",
+    image: "/team/bailey.jpg",
+    bio: "Cornell alum focusing on frontend design, algorithms, and data analysis. Expert at creating intuitive interfaces backed by sophisticated automation. Bailey builds effective solutions that solve real business problems.",
     social: {
-      linkedin: "https://www.linkedin.com/in/grayson-crozier-1925411a6/",
-      github: "https://github.com/grayson40",
-      twitter: "https://x.com/graysoncrozier"
+      linkedin: "https://linkedin.com/in/bailey-rosen",
+      github: "https://github.com/bailey-rosen"
     }
   },
   {
-    name: "Bailey Rosen",
-    role: "Lead Software Architect",
-    image: "/team/bailey-rosen.jpg",
-    bio: "Cloud architecture expert with a focus on scalable systems. AWS certified solutions architect.",
+    name: "Grayson Crozier",
+    role: "Co-Founder/CTO",
+    image: "/team/gray.jpg",
+    bio: "UCF graduate specializing in backend systems and architecture. With 5+ years delivering complete mobile, web, and AI solutions across diverse industries. Grayson transforms complex requirements into reliable, production-ready implementations.",
     social: {
-      // linkedin: "https://linkedin.com/in/mrodriguez",
-      github: "https://github.com/baileyrosen3"
+      linkedin: "https://linkedin.com/in/grayson-crozier",
+      github: "https://github.com/grayson-crozier",
+      twitter: "https://twitter.com/grayson_crozier"
     }
-  }
+  },  
 ]
 
 const containerVariants = {
@@ -60,17 +60,22 @@ const itemVariants = {
 
 export function Team() {
   return (
-    <section className="py-32 bg-gray-50">
-      <div className="container max-w-6xl">
+    <section className="py-32 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/5 w-72 h-72 bg-orange-500/5 rounded-full blur-3xl floating-slow"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gray-700/10 rounded-full blur-3xl floating"></div>
+      </div>
+      
+      <div className="container max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Our Team</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Meet the founders behind Gray Bay Solutions, bringing together decades of experience in software development and cloud architecture.
+          <h2 className="text-4xl font-bold mb-4 text-white">Meet Our Team</h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            We deliver complete, working software solutions. From concept to deployment, our combined expertise allows us to tackle any technical challenge and implement robust systems that drive real business value.
           </p>
         </motion.div>
 
@@ -85,30 +90,30 @@ export function Team() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group"
+              className="space-card overflow-hidden rounded-xl group hover:translate-y-[-8px] transition-all duration-500"
             >
-              <div className="relative h-80 w-full">
+              <div className="relative h-80 w-full overflow-hidden">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <h3 className="text-2xl font-semibold mb-1">{member.name}</h3>
                   <p className="text-orange-400 text-lg">{member.role}</p>
                 </div>
               </div>
               <div className="p-8">
-                <p className="text-gray-600 text-lg leading-relaxed mb-6">{member.bio}</p>
+                <p className="text-gray-300 text-lg leading-relaxed mb-6">{member.bio}</p>
                 <div className="flex gap-4">
                   {member.social.linkedin && (
                     <a
                       href={member.social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-orange-500 transition-colors"
+                      className="text-gray-500 hover:text-orange-500 transition-colors"
                     >
                       <IconBrandLinkedin size={28} />
                     </a>
@@ -118,7 +123,7 @@ export function Team() {
                       href={member.social.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-orange-500 transition-colors"
+                      className="text-gray-500 hover:text-orange-500 transition-colors"
                     >
                       <IconBrandGithub size={28} />
                     </a>
@@ -128,7 +133,7 @@ export function Team() {
                       href={member.social.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-orange-500 transition-colors"
+                      className="text-gray-500 hover:text-orange-500 transition-colors"
                     >
                       <IconBrandTwitter size={28} />
                     </a>
@@ -138,6 +143,13 @@ export function Team() {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+      
+      {/* Subtle Section Divider */}
+      <div className="section-divider mt-16">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-gray-800 opacity-70"></path>
+        </svg>
       </div>
     </section>
   )
