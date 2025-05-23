@@ -61,61 +61,56 @@ export function Portfolio() {
   const hasMoreItems = visibleCount < filteredItems.length
 
   return (
-    <section id="portfolio" className="py-20 relative">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/5 w-72 h-72 bg-orange-500/5 rounded-full blur-3xl floating-slow"></div>
-        <div className="absolute bottom-1/4 right-1/5 w-96 h-96 bg-gray-700/10 rounded-full blur-3xl floating"></div>
-      </div>
+    <section id="portfolio" className="py-24 bg-white relative">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-gray-50/80"></div>
+      <div className="absolute left-0 right-0 top-0 h-24 bg-gradient-to-b from-white to-transparent"></div>
+      <div className="absolute left-0 right-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
       
-      <div className="container relative z-10">
-        <motion.h2 
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-4"
+          className="text-center mb-12"
         >
-          Our Work
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-gray-400 text-center mb-12 max-w-2xl mx-auto"
-        >
-          Delivering innovative solutions across various industries
-        </motion.p>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Work</h2>
+          <p className="text-gray-600 text-xl max-w-2xl mx-auto">
+            Delivering innovative solutions across various industries
+          </p>
+        </motion.div>
 
         {/* GitHub Banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-3 mb-12 glass-effect py-4 rounded-lg"
+          className="flex items-center justify-center gap-3 mb-10 bg-white py-4 rounded-lg shadow-sm border border-gray-100 max-w-2xl mx-auto"
         >
-          <IconBrandGithub size={24} className="text-orange-400" />
-          <span className="text-gray-300">
+          <IconBrandGithub size={24} className="text-orange-500" />
+          <span className="text-gray-700">
             View our open source projects on{' '}
             <a
               href="https://github.com/gray-bay-solutions"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-orange-500 hover:text-orange-400 font-medium"
+              className="text-orange-500 hover:text-orange-600 font-medium"
             >
               GitHub
             </a>
           </span>
         </motion.div>
 
-        <div className="flex justify-center gap-4 mb-12 flex-wrap">
+        {/* Filter Tabs */}
+        <div className="flex justify-center gap-3 mb-12 flex-wrap">
           {filters.map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-2 rounded-full transition-all duration-300 ${
+              className={`px-5 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
                 activeFilter === filter
-                  ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md"
+                  : "bg-white text-gray-700 border border-gray-200 hover:border-orange-200 hover:bg-orange-50"
               }`}
             >
               {filter}
@@ -123,6 +118,7 @@ export function Portfolio() {
           ))}
         </div>
 
+        {/* Portfolio Grid */}
         <motion.div 
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -135,7 +131,7 @@ export function Portfolio() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className={`space-card overflow-hidden rounded-xl group ${item.link ? 'cursor-pointer transition-transform hover:scale-[1.02]' : ''}`}
+                className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group ${item.link ? 'cursor-pointer hover:translate-y-[-4px]' : ''}`}
                 onClick={() => item.link && window.open(item.link, '_blank', 'noopener,noreferrer')}
               >
                 <div className="relative h-48">
@@ -145,45 +141,45 @@ export function Portfolio() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
                   {item.link && (
-                    <div className="absolute top-4 right-4 bg-gray-900/70 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                      <IconExternalLink size={18} className="text-orange-400" />
+                    <div className="absolute top-4 right-4 bg-white/90 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
+                      <IconExternalLink size={18} className="text-orange-500" />
                     </div>
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2 text-white flex items-center">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800 flex items-center">
                     {item.title}
                     {item.link && (
-                      <IconExternalLink size={18} className="ml-2 text-orange-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <IconExternalLink size={18} className="ml-2 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                     )}
                   </h3>
-                  <p className="text-gray-400 mb-4">{item.description}</p>
+                  <p className="text-gray-600 mb-4">{item.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {item.tags.map((tag, idx) => (
                       <span
                         key={idx}
-                        className="bg-gray-800 text-orange-400 px-3 py-1 rounded-full text-sm"
+                        className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <div className="border-t border-gray-700 pt-4">
-                    <p className="text-sm text-gray-400 mb-2">
-                      Industry: <span className="text-orange-400">{item.industry}</span>
+                  <div className="border-t border-gray-100 pt-4">
+                    <p className="text-sm text-gray-600 mb-2">
+                      Industry: <span className="text-orange-500 font-medium">{item.industry}</span>
                     </p>
                     <div className="space-y-1">
                       {item.outcomes.map((outcome, idx) => (
-                        <p key={idx} className="text-sm text-gray-500">
-                          • {outcome}
+                        <p key={idx} className="text-sm text-gray-600 flex items-start">
+                          <span className="text-orange-500 mr-2">•</span> {outcome}
                         </p>
                       ))}
                     </div>
                     {item.link && (
-                      <div className="mt-4 pt-2 border-t border-gray-700">
-                        <span className="text-sm text-orange-400 flex items-center group-hover:underline">
+                      <div className="mt-4 pt-2 border-t border-gray-100">
+                        <span className="text-sm text-orange-500 font-medium flex items-center group-hover:underline">
                           Visit Project <IconExternalLink size={14} className="ml-1" />
                         </span>
                       </div>
@@ -204,10 +200,10 @@ export function Portfolio() {
           >
             <button
               onClick={handleSeeMore}
-              className="px-8 py-3 bg-gray-800 border border-gray-700 rounded-lg text-orange-400 hover:bg-gray-700 transition-all duration-300 flex items-center gap-2 glass-effect"
+              className="px-8 py-3 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 hover:border-orange-200 transition-all duration-300 flex items-center gap-2 shadow-md hover:shadow-lg"
             >
               <span>See More Projects</span>
-              <IconChevronDown size={20} />
+              <IconChevronDown size={20} className="text-orange-500" />
             </button>
           </motion.div>
         )}

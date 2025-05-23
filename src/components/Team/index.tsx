@@ -60,21 +60,27 @@ const itemVariants = {
 
 export function Team() {
   return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/5 w-72 h-72 bg-orange-500/5 rounded-full blur-3xl floating-slow"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gray-700/10 rounded-full blur-3xl floating"></div>
+    <section id="team" className="py-24 bg-white relative">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-gray-50/70"></div>
+      <div className="absolute left-0 right-0 top-0 h-24 bg-gradient-to-b from-white to-transparent"></div>
+      <div className="absolute left-0 right-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
+      
+      {/* Subtle accents */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/5 w-72 h-72 bg-orange-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gray-300/20 rounded-full blur-3xl"></div>
       </div>
       
-      <div className="container max-w-6xl relative z-10">
+      <div className="container max-w-6xl mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-white">Meet Our Team</h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-gray-800">Meet Our Team</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We deliver complete, working software solutions. From concept to deployment, our combined expertise allows us to tackle any technical challenge and implement robust systems that drive real business value.
           </p>
         </motion.div>
@@ -90,7 +96,7 @@ export function Team() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="space-card overflow-hidden rounded-xl group hover:translate-y-[-8px] transition-all duration-500"
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl group hover:translate-y-[-8px] transition-all duration-300"
             >
               <div className="relative h-80 w-full overflow-hidden">
                 <Image
@@ -99,21 +105,22 @@ export function Team() {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-800/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <h3 className="text-2xl font-semibold mb-1">{member.name}</h3>
-                  <p className="text-orange-400 text-lg">{member.role}</p>
+                  <p className="text-orange-300 text-lg">{member.role}</p>
                 </div>
               </div>
               <div className="p-8">
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">{member.bio}</p>
+                <p className="text-gray-600 text-lg leading-relaxed mb-6">{member.bio}</p>
                 <div className="flex gap-4">
                   {member.social.linkedin && (
                     <a
                       href={member.social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-500 hover:text-orange-500 transition-colors"
+                      className="text-gray-400 hover:text-orange-500 transition-colors"
+                      aria-label={`${member.name}'s LinkedIn profile`}
                     >
                       <IconBrandLinkedin size={28} />
                     </a>
@@ -123,7 +130,8 @@ export function Team() {
                       href={member.social.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-500 hover:text-orange-500 transition-colors"
+                      className="text-gray-400 hover:text-orange-500 transition-colors"
+                      aria-label={`${member.name}'s GitHub profile`}
                     >
                       <IconBrandGithub size={28} />
                     </a>
@@ -133,7 +141,8 @@ export function Team() {
                       href={member.social.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-500 hover:text-orange-500 transition-colors"
+                      className="text-gray-400 hover:text-orange-500 transition-colors"
+                      aria-label={`${member.name}'s Twitter profile`}
                     >
                       <IconBrandTwitter size={28} />
                     </a>
@@ -143,13 +152,6 @@ export function Team() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
-      
-      {/* Subtle Section Divider */}
-      <div className="section-divider mt-16">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-gray-800 opacity-70"></path>
-        </svg>
       </div>
     </section>
   )
