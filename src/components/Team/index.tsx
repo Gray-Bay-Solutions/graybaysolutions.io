@@ -27,8 +27,7 @@ const team: TeamMember[] = [
     image: "/team/bailey.jpg",
     bio: "Cornell alum focusing on frontend design, algorithms, and data analysis. Expert at creating intuitive interfaces backed by sophisticated automation. Bailey builds effective solutions that solve real business problems.",
     social: {
-      linkedin: "https://linkedin.com/in/bailey-rosen",
-      github: "https://github.com/bailey-rosen"
+      github: "https://github.com/baileyrosen3"
     }
   },
   {
@@ -37,11 +36,28 @@ const team: TeamMember[] = [
     image: "/team/gray.jpg",
     bio: "UCF graduate specializing in backend systems and architecture. With 5+ years delivering complete mobile, web, and AI solutions across diverse industries. Grayson transforms complex requirements into reliable, production-ready implementations.",
     social: {
-      linkedin: "https://linkedin.com/in/grayson-crozier",
-      github: "https://github.com/grayson-crozier",
-      twitter: "https://twitter.com/grayson_crozier"
+      linkedin: "https://www.linkedin.com/in/grayson-crozier-1925411a6/",
+      github: "https://github.com/grayson40",
     }
-  },  
+  },
+  {
+    name: "Hector Alvarado",
+    role: "Co-Founder/PM",
+    image: "/team/hector.jpg",
+    bio: "With over four years of experience as a project leader, Hector is adept at forging strong client relationships and ensuring seamless project delivery. This Cornell alumnus excels at consistently delivering great results and making every client interaction a success.",
+    social: {
+      github: "https://github.com/hectora10",
+    }
+  },
+  {
+    name: "Marc Sapienza",
+    role: "Co-Founder/Full Stack Developer",
+    image: "/team/marc.jpg",
+    bio: "Cornell alumn specializing in understanding client needs and full-stack development. Known for meticulous attention to detail and dedication to service, Marc cultivates strong partnerships to deliver impactful, precisely tailored technical solutions.",
+    social: {
+      github: "https://github.com/Msap96",
+    }
+  }
 ]
 
 const containerVariants = {
