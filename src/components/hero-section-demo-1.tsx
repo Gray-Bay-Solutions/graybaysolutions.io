@@ -1,92 +1,151 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { scrollToSection } from "@/lib/utils";
-import { TypewriterEffect } from "@/components/ui/typewriter-effect";
+import { FlipWords } from "@/components/ui/flip-words";
+import Image from "next/image";
+import {
+  Carousel,
+  Card as AppleCard,
+  CardType as AppleCardType,
+} from "@/components/ui/apple-cards-carousel";
 
 interface HeroSectionOneProps {
-  headline: string;
+  headlineStart: string;
+  flipWords: string[];
+  headlineEnd?: string;
   subheading: string;
   primaryCtaText: string;
   primaryCtaLink: string;
   secondaryCtaText?: string;
   secondaryCtaLink?: string;
-  heroImageUrl?: string;
+  techLogos?: Array<{
+    name: string;
+    logo: string;
+    width: number;
+    height: number;
+  }>;
+  carouselCardsData?: AppleCardType[];
 }
 
 export default function HeroSectionOne({
-  headline,
+  headlineStart,
+  flipWords,
+  headlineEnd = "",
   subheading,
   primaryCtaText,
   primaryCtaLink,
   secondaryCtaText = "View Our Work",
   secondaryCtaLink = "#portfolio",
-  heroImageUrl = "/placeholder-hero-image.jpg",
+  techLogos = [
+    { name: "Next.js", logo: "/logos/nextjs.svg", width: 80, height: 30 },
+    { name: "React", logo: "/logos/react.svg", width: 80, height: 30 },
+    {
+      name: "TailwindCSS",
+      logo: "/logos/tailwindcss.svg",
+      width: 100,
+      height: 30,
+    },
+    { name: "Vercel", logo: "/logos/vercel.svg", width: 80, height: 25 },
+    { name: "Supabase", logo: "/logos/supabase.svg", width: 80, height: 30 },
+  ],
+  carouselCardsData = [],
 }: HeroSectionOneProps) {
-  // Prepare words for TypewriterEffect
-  const headlineWords = headline.split(" ").map((word, index) => {
-    if (index < 2) {
-      // Assuming "Digital Transformation" are the first two words
-      return { text: word, className: "text-orange-500 dark:text-orange-400" };
-    }
-    return { text: word }; // Default styling will be applied from TypewriterEffect or its container
-  });
+  const carouselItems = carouselCardsData.map((cardData, idx) => (
+    <AppleCard key={cardData.id || idx} card={cardData} index={idx} layout />
+  ));
 
   return (
-    <div className="relative mx-auto flex min-h-[calc(100vh-80px)] flex-col items-center justify-center pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-10 md:pb-16">
-      <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-        <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-orange-500 to-transparent" />
-      </div>
-      <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-        <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-orange-500 to-transparent" />
-      </div>
-      <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
-        <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
-      </div>
-      <div className="px-4 text-center w-full max-w-5xl">
-        <TypewriterEffect
-          words={headlineWords}
-          className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-normal sm:tracking-tight text-slate-800 dark:text-white mb-10 md:mb-12 break-words"
-          cursorClassName="bg-orange-500"
-        />
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-            delay: headline.replace(/ /g, "").length * 0.1 + 1,
-            ease: "easeOut",
-          }}
-          className="relative z-10 mx-auto mt-0 max-w-xl text-center text-lg font-normal text-gray-600 md:text-xl dark:text-neutral-300 leading-relaxed mb-10 md:mb-12"
-        >
-          {subheading}
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-            delay: headline.replace(/ /g, "").length * 0.1 + 1.3,
-            ease: "easeOut",
-          }}
-          className="relative z-10 mt-0 flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
-        >
-          <button
-            onClick={() => scrollToSection(primaryCtaLink)}
-            className="w-full sm:w-auto transform rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-3.5 text-base font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-black"
+    <div className="relative text-white min-h-[calc(100vh-80px)] flex flex-col justify-center items-center py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full max-w-screen-xl mx-auto">
+        {/* Left Column: Text Content & CTAs */}
+        <div className="lg:w-1/2 lg:pr-10 xl:pr-16 text-center lg:text-left mb-12 lg:mb-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {primaryCtaText}
-          </button>
-          {secondaryCtaText && secondaryCtaLink && (
+            <div className="inline-block bg-gray-800 text-sm text-gray-300 px-4 py-1.5 rounded-full mb-6 shadow-md">
+              Introducing GrayBay Solutions
+            </div>
+            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 break-words">
+              {headlineStart}
+              <FlipWords
+                words={flipWords}
+                className="text-orange-500 dark:text-orange-400"
+              />
+              {headlineEnd}
+            </div>
+            <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-xl mx-auto lg:mx-0">
+              {subheading}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          >
             <button
-              onClick={() => scrollToSection(secondaryCtaLink)}
-              className="w-full sm:w-auto transform rounded-lg border border-slate-300 bg-white px-8 py-3.5 text-base font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 dark:focus:ring-offset-black"
+              onClick={() => scrollToSection(primaryCtaLink)}
+              className="w-full sm:w-auto bg-white text-black px-8 py-3.5 text-base font-semibold rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black"
             >
-              {secondaryCtaText}
+              {primaryCtaText}
             </button>
+            {secondaryCtaText && secondaryCtaLink && (
+              <button
+                onClick={() => scrollToSection(secondaryCtaLink)}
+                className="w-full sm:w-auto bg-gray-800 text-white px-8 py-3.5 text-base font-semibold rounded-lg border border-gray-700 shadow-sm hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-black"
+              >
+                {secondaryCtaText}
+              </button>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Right Column: Apple Cards Carousel */}
+        <motion.div
+          className="lg:w-1/2 mt-16 lg:mt-0 flex justify-center items-center w-full lg:pl-10 xl:pl-16"
+          initial={{ opacity: 0, scale: 0.95, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {carouselItems.length > 0 ? (
+            <div className="w-full max-w-2xl lg:max-w-none">
+              <Carousel items={carouselItems} />
+            </div>
+          ) : (
+            <div className="w-full h-[400px] lg:h-[500px] bg-gray-900/50 rounded-lg flex items-center justify-center text-gray-500">
+              <p>No solutions to display in carousel.</p>
+            </div>
           )}
         </motion.div>
       </div>
+
+      {/* Bottom Row: Technology Logos */}
+      <motion.div
+        className="relative z-10 w-full max-w-screen-xl mx-auto mt-20 lg:mt-28 flex flex-wrap justify-center items-center gap-x-8 sm:gap-x-10 md:gap-x-12 gap-y-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+      >
+        {techLogos.map((tech) => (
+          <div
+            key={tech.name}
+            className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100 transform hover:scale-105 duration-300"
+            title={tech.name}
+          >
+            <Image
+              src={tech.logo}
+              alt={`${tech.name} logo`}
+              width={tech.width}
+              height={tech.height}
+              className="object-contain"
+            />
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 }
