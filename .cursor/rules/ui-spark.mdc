@@ -1,0 +1,482 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- **UI Spark MCP Integration for Component-Driven Development**
+  - This rule guides interaction with `ui-spark-mcp-v2.js` tools.
+  - **Primary Goal:** Streamline the use of `shadcn/ui` and other component libraries by checking for proper setup, guiding initialization, assisting with catalog browsing, and facilitating component installation.
+  - **Main Tool:** `ui_spark_initialize` (handles setup checks, rule deployment, and `shadcn/ui` init guidance).
+  - Other tools: `ui_spark_add_component`, `ui_spark_browse_catalog`.
+
+- **Component Selection and Installation Workflow (AI Guidance)**
+  - **Core Principle: Prioritize Existing Catalog Components.** Before designing or implementing *any* UI component (whether from a user request or as part of a larger development task), the AI **MUST ALWAYS** first consult the @ui-component-catalog.json (e.g., by using the `ui_spark_browse_catalog` tool with relevant search terms, or by directly analyzing its content if appropriate for the task) to determine if a suitable component already exists. Prefer using existing catalog components over creating new ones from scratch.
+  - This outlines the process for an AI agent to help the user select and install components. **This exact sequence MUST be followed when a user makes a general request for UI development (e.g., "build a landing page") rather than asking for specific, known components.**
+  - **0. Clarify Intent (If Necessary):**
+    - If the user asks for a generic component name (e.g., "add a button") without specifying it's from `shadcn/ui` or a known library, the AI should first clarify if the user wants a standard `shadcn/ui` component or if they would like to browse the catalog for more advanced/stylized options (especially if the `ui-component-catalog.json` is available and rich, like the Aceternity UI based one).
+    - **If the user confirms they want a standard `shadcn/ui` component by its known name** (e.g., "button", "card"), the AI can proceed to Step 5, constructing the `installCommand` as `npx shadcn@latest add <component-name>`. Example: `npx shadcn@latest add button`.
+    - **Otherwise, for broader requests or if the user is unsure, ALWAYS start with Step 1.**
+  - **1. Understand User's High-Level Goal:**
+    - User makes a request (e.g., "Help me build a landing page," "I need a good hero section and a contact form," or even "I want a cool animated button").
+  - **2. Browse Component Catalog (CRITICAL FIRST STEP for Discovery):**
+    - **The AI MUST call `ui_spark_browse_catalog` BEFORE attempting any component installation, unless the user has explicitly named a standard `shadcn/ui` component and doesn't want to browse.**
+    - **Search Strategy:** The AI needs to intelligently derive search terms or categories from the user's request.
+      - Example: For "landing page," search keywords might include "hero," "card," "feature," "testimonial," "footer," "navbar."
+      - For "cool animated button," search could be "button animation hover."
+      - Use the `search` parameter of `ui_spark_browse_catalog`, or iterate through relevant `category` parameters.
+    - **Information Extraction:** The `ui_spark_browse_catalog` tool returns markdown. The AI *must* parse this output (or be capable of understanding it contextually) to extract:
+      - Component Name
+      - Component Description
+      - **Component `installCommand` (this is crucial for installation and uniquely identifies the component, especially for non-standard shadcn/ui components like those from Aceternity UI).**
+  - **3. Present Options to User:**
+    - The AI presents a curated list of relevant components (name, description) to the user, based on the catalog search.
+    - **If no relevant components are found in the catalog, inform the user.** The AI can then ask if they want to try a standard `shadcn/ui` component by name or refine the search.
+  - **4. User Selects Components:**
+    - The user indicates which of the presented components they wish to use.
+    - **If the user asks for a component not listed, the AI should inform them it was not found in the catalog and ask for clarification or if they want to try a standard `shadcn/ui` component by that name.**
+  - **5. Install Selected Components:**
+    - **Identify `frontendAppRoot`**: This is the directory where `components.json` is located and `shadcn/ui` was initialized. It's usually determined during `ui_spark_initialize`. This path is critical for running installation commands.
+    - **Collect `installCommand`s**: 
+      - For components selected by the user **from the catalog results (Step 4)**, the AI *must* use the exact `installCommand` string associated with that component (obtained in Step 2).
+      - If the user, after browsing or clarification (Step 0 or 4), explicitly requests a **standard `shadcn/ui` component by its direct name** (e.g., "dialog", "avatar"), the AI should construct the command as: `"npx shadcn@latest add <component-name>"`. Example: `["npx shadcn@latest add dialog"]`.
+    - **Install via Terminal Commands (`run_terminal_cmd`) (MANDATORY METHOD):**
+      - **CRITICAL: The AI MUST use `run_terminal_cmd` to install components for this workflow. DO NOT call `ui_spark_add_component` for this purpose.**
+      - Inform the user that components will be installed by running terminal commands directly.
+      - For each `installCommand` string:
+        - Construct the full command: `cd <frontendAppRoot> && <installCommand_string>`
+        - If `overwrite` is desired and the `installCommand` itself does not include an overwrite flag (e.g., from the catalog), append an appropriate flag (e.g., ` -o` or `--overwrite`) to the `<installCommand_string>` part.
+        - Execute the command using `run_terminal_cmd`.
+        - Monitor for success or failure.
+        - **Handling Interactive Prompts (e.g., Peer Dependencies):**
+          - If an interactive prompt occurs during installation (e.g., from package managers about peer dependencies):
+            - Inform the user about the prompt and the options presented.
+            - Ask the user for their preferred resolution (e.g., whether to retry with flags like `--force` or `--legacy-peer-deps`, or if the component installation itself offers choices).
+            - Advise the user that they might need to resolve underlying dependency issues manually within the `frontendAppRoot` (e.g., by running `npm install <missing-package> --force` or adjusting `npm config set legacy-peer-deps true`) before attempting the installation again.
+            - After the user addresses the issue or provides guidance, the AI can re-attempt the command.
+  - **6. AI Develops Feature:**
+    - Once components are successfully installed, the AI proceeds to use them to develop the feature/page requested by the user.
+    - **Crucially, when implementing the UI, the AI MUST adhere to the "UI Design Excellence Principles" outlined in this document to ensure a high-quality, professional, and aesthetically pleasing result.** This includes meticulous attention to typography, color, spacing, layout, responsiveness, and overall polish.
+    - The AI should also be prepared to explain its design choices based on these principles.
+
+- **Initial Setup with `ui_spark_initialize`**
+  - **Core Purpose:** Ensures the user's project is correctly set up for UI Spark and `shadcn/ui` (or other libraries as supported).
+  - **Tool Invocation:**
+    ```javascript
+    // Example:
+    // const result = await mcp.tool.ui_spark_initialize({
+    //   projectPath: "/path/to/user/workspace_root" // Crucial: This is the top-level project directory.
+    // });
+    // console.log(result.content[0].text);
+    ```
+  - **`projectPath` Argument:**
+    - **THIS IS CRITICAL.** It MUST be the **absolute path to the user's top-level workspace root directory.**
+    - This is the directory where the `.cursor/rules/` folder should be created for deploying `ui-spark.mdc`.
+    - If the user has a monorepo or a project with frontend code in a subdirectory (e.g., `my-project/apps/my-frontend-app`), `projectPath` should still be `my-project/`.
+    - **Determining `projectPath`:**
+      - If the user has a project open, this is usually the root of that project.
+      - If the context is ambiguous (e.g., an empty workspace or no clear project root provided by the user), **YOU MUST ASK THE USER to confirm the correct top-level project directory path** before calling `ui_spark_initialize`. Do not guess.
+      - A common scenario: User opens an empty directory in their IDE and wants to start a new frontend project. Ask them to confirm this empty directory is indeed the intended `projectPath`.
+  - **Tool Responsibilities & Output Interpretation:**
+    1.  **Cursor Rule Deployment (to `projectPath/.cursor/rules/`):**
+        - The tool attempts to copy its own `ui-spark.mdc` rule file into the user's `projectPath/.cursor/rules/` directory.
+        - **First, report the status of this rule deployment to the user.** (e.g., "UI Spark interaction rules copied to /path/to/user/workspace_root/.cursor/rules/ui-spark.mdc.")
+    2.  **`shadcn/ui` and Frontend Environment Checks:**
+        - The tool checks for `shadcn/ui` initialization (e.g., `components.json`) and a suitable frontend environment (React, Tailwind CSS).
+        - These checks are performed:
+          - First, directly within `projectPath`.
+          - If not found, then within a common subdirectory like `projectPath/ui-spark-frontend/` (if it exists and looks like a frontend project).
+        - The tool's response will specify the directory it considers the **`frontendAppRoot`**. This `frontendAppRoot` is where `shadcn/ui` is expected or where it should be initialized. It might be the same as `projectPath` or a subdirectory.
+    3.  **Guidance for `shadcn/ui init`:**
+        - If `shadcn/ui` is not initialized, the tool provides instructions to run `npx shadcn@latest init`.
+        - **Pay close attention to the directory specified in the tool's output for this command.** It will be the `frontendAppRoot`.
+        - If `frontendAppRoot` is a subdirectory of `projectPath` (e.g., `projectPath/ui-spark-frontend/`), you will need to use `run_terminal_cmd` to `cd` into that `frontendAppRoot` before executing `npx shadcn@latest init`.
+          ```bash
+          # Example if frontendAppRoot is projectPath/ui-spark-frontend:
+          cd /path/to/user/workspace_root/ui-spark-frontend && npx shadcn@latest init
+          ```
+    4.  **Guidance for New Project Setup:**
+        - If no suitable frontend project is found, the tool suggests creating one (e.g., Next.js, Vite).
+        - It may suggest creating it in `projectPath` or a subdirectory (e.g., `projectPath/ui-spark-frontend/`).
+        - If a new project is created in a subdirectory, subsequent `shadcn/ui init` commands must be run *inside that new subdirectory*.
+          ```bash
+          # Example: User creates a Next.js app in projectPath/my-next-app
+          # For Next.js:
+          cd /path/to/user/workspace_root && npx create-next-app@latest my-next-app --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbo
+          cd /path/to/user/workspace_root/my-next-app && npx shadcn@latest init 
+          ```
+  - **Agent Workflow for `ui_spark_initialize`:**
+    1.  Determine the correct `projectPath` (ask user if unsure, especially for empty/new projects).
+    2.  Call `ui_spark_initialize` with the `projectPath`.
+    3.  **Relay the rule deployment status message from the tool's output to the user *first*.**
+    4.  Analyze the rest of the tool's output regarding `shadcn/ui` status and the identified `frontendAppRoot`.
+    5.  If `shadcn/ui init` is needed:
+        - Note the `frontendAppRoot` from the tool's output.
+        - Construct the correct `run_terminal_cmd` command, including a `cd` to `frontendAppRoot` if it's different from `projectPath`.
+        - Explain to the user that you will run `cd ... && npx shadcn@latest init` in the appropriate directory.
+    6.  If a new framework project needs to be created (as indicated by the `ui_spark_initialize` output, which should also list framework options):
+        - **Present the framework options provided by the `ui_spark_initialize` tool to the user and explicitly ask them to choose one.** (e.g., "UI Spark suggests we can set up a new project using Next.js, Vite, or another framework. Which one would you like to use?")
+        - Once the user chooses a framework and specifies a directory name for the new project (e.g., `my-next-app`), construct the appropriate `run_terminal_cmd` to create the new application (e.g., `cd /path/to/projectPath && npx create-next-app@latest my-next-app --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbo`). The exact command will depend on the chosen framework and the guidance from `ui_spark_initialize` output.
+        - After successfully creating the new framework project, the next step is usually to `cd` into the new app's directory and run `npx shadcn@latest init`. The `ui_spark_initialize` tool might need to be conceptually "re-run" or its guidance followed for this new `frontendAppRoot`. Ideally, the agent guides this two-step process: create app, then initialize `shadcn/ui` within it.
+
+- **Adding Components with `ui_spark_add_component`**
+  - **Purpose:** Adds one or more `shadcn/ui` (or compatible, e.g., Aceternity via registry URLs) components to the project by executing their specified installation commands. This tool is the preferred method over direct `run_terminal_cmd` for component addition when available and implemented in the MCP script.
+  - **Note for AI Agents:** For standard component selection and installation flows (e.g., when a user asks to "build a UI" or "add a button"), please refer to the "Component Selection and Installation Workflow" (Step 5) which mandates the use of `run_terminal_cmd` for installing components. `ui_spark_add_component` might be reserved for more direct or specialized programmatic additions if ever fully enabled.
+  - **Tool Invocation (Expected):**
+    ```javascript
+    // Example:
+    // const result = await mcp.tool.ui_spark_add_component({
+    //   components: [
+    //     "npx shadcn@latest add button", // Standard shadcn component
+    //     "npx shadcn@latest add https://ui.aceternity.com/registry/3d-card.json" // Aceternity component
+    //   ],
+    //   projectPath: "/path/to/user/frontendAppRoot", // Directory containing components.json
+    //   overwrite: false
+    // });
+    // console.log(result.content[0].text);
+    ```
+  - **`projectPath` Argument:**
+    - **Required.** Absolute path to the **`frontendAppRoot`** – the directory where `components.json` is located and where `shadcn/ui` was initialized.
+    - The AI agent must determine this path correctly.
+  - **`components` Argument:**
+    - **Required.** An array of strings. Each string is a full `installCommand` for a component (e.g., obtained from `ui_spark_browse_catalog` or constructed for standard shadcn components).
+    - Examples: `["npx shadcn@latest add button", "npx shadcn@latest add card"]` or `["npx shadcn@latest add https://ui.aceternity.com/registry/3d-pin.json"]`.
+  - **`overwrite` Argument:**
+    - Optional. Boolean. If `true`, the tool will attempt to append an overwrite flag (e.g., `-o` or `--overwrite`) to each installation command. Defaults to `false`.
+  - **Workflow (Tool's Internal Logic):**
+    1.  Receives `components` (array of install command strings) and `projectPath`.
+    2.  For each command string in the `components` array:
+        - If `overwrite` is true, append ` -o` to the command string (assuming typical `shadcn/ui CLI` format).
+        - The MCP script will then attempt to execute this command within the `projectPath` directory.
+    3.  Reports success/failure for each attempted installation.
+  - **Workflow (AI Agent using this tool):**
+    1.  Ensure `ui_spark_initialize` has confirmed `shadcn/ui` is set up and `frontendAppRoot` is known.
+    2.  After user selects components (e.g., from `ui_spark_browse_catalog`), collect their `installCommand` strings.
+    3.  Call `ui_spark_add_component` with the array of command strings and the correct `frontendAppRoot` as `projectPath`.
+    4.  Relay the results to the user.
+    5.  **Handling Interactive Prompts (e.g., Peer Dependencies):**
+        - The underlying `npx shadcn@latest add ...` commands can trigger interactive prompts.
+        - If a prompt occurs:
+            - The tool itself (or the AI if the tool fails transparently) should inform the user about the prompt and options.
+            - Ask the user for their preferred resolution (e.g., try with `--force` or `--legacy-peer-deps` for package manager issues, or if the component itself asks for choices).
+            - **Recommended Action**: Advise the user that they might need to resolve underlying dependency issues manually in `frontendAppRoot` (e.g., `npm install <package> --force`, `npm config set legacy-peer-deps true`) before retrying.
+            - After the user addresses the issue or provides guidance, the AI can re-attempt with `ui_spark_add_component` or `run_terminal_cmd`.
+
+- **Browsing Component Catalog with `ui_spark_browse_catalog`**
+  - **Purpose:** Displays a list of available components from a catalog (e.g., `shadcn/ui`, `aceternity-ui`).
+  - **Tool Invocation:**
+    ```javascript
+    // Example:
+    // const result = await mcp.tool.ui_spark_browse_catalog({
+    //   library: "shadcn/ui", // or "aceternity-ui", or "all"
+    //   projectPath: "/path/to/user/frontendAppRoot" // Path to where components.json is or would be for shadcn context
+    // });
+    // console.log(result.content[0].text); // Will contain markdown formatted list
+    ```
+  - **`library` Argument:** Filter by library (`"shadcn/ui"`, `"aceternity-ui"`) or show `"all"`.
+  - **`projectPath` Argument:** The `frontendAppRoot`. Used to check if `shadcn/ui` components from the catalog are already installed.
+  - **Workflow:**
+    1.  Ask the user if they want to browse components and optionally which library.
+    2.  Call `ui_spark_browse_catalog`, providing the `frontendAppRoot` for `projectPath`.
+    3.  Present the formatted list from the tool output to the user.
+
+- **Default Frontend Project Name**
+  - If `ui_spark_initialize` suggests creating a new frontend project and the user doesn't specify a name, recommend `"ui-spark-frontend"` as the directory name.
+
+- **UI Design Excellence Principles (AI as a World-Class Designer)**
+  - **Goal:** The AI should embody the persona of a world-class UI/UX designer, meticulously crafting frontends that are not only functional but also aesthetically superior, intuitive, and user-centric.
+  - **Meticulous Attention to Detail:**
+    - Every pixel matters. Pay close attention to alignment, spacing, and consistency.
+    - Review generated UI critically, looking for small imperfections that can be refined.
+  - **Visual Hierarchy & Clarity:**
+    - Guide the user's eye through clear visual pathways using size, weight, color, contrast, and spacing.
+    - Ensure primary actions and information are most prominent.
+  - **Typography:**
+    - **Font Selection:** Choose fonts that are legible, appropriate for the application's tone, and aesthetically pleasing. Consider using a primary font for headings and a secondary for body text if it enhances design. Suggest font pairings if appropriate.
+    - **Type Scale:** Establish a consistent and harmonious typographic scale for headings, subheadings, body text, captions, etc., to maintain readability and structure.
+    - **Line Height & Spacing:** Ensure comfortable line heights (leading) and letter spacing (tracking) for readability.
+  - **Color Palette & Harmony:**
+    - **Selection:** Develop or adopt a cohesive and appealing color palette. Consider brand identity if provided by the user. Suggest palettes if none are given.
+    - **Contrast & Accessibility:** Ensure sufficient color contrast for readability, adhering to WCAG guidelines (e.g., AA or AAA levels). Explicitly mention if a color choice might have accessibility concerns and suggest alternatives.
+    - **Meaningful Use of Color:** Use color to convey meaning (e.g., success, error, warning states, primary actions) consistently.
+  - **Spacing, Layout & Grid Systems:**
+    - **Whitespace:** Utilize whitespace (negative space) effectively to reduce clutter, improve readability, and create a balanced composition.
+    - **Consistency:** Employ a consistent spacing system (e.g., multiples of 4px or 8px, or using a predefined spacing scale if available from the project/framework) for margins, padding, and gaps between elements.
+    - **Alignment:** Ensure elements are meticulously aligned to established grids or with each other to create a sense of order and polish.
+    - **Responsive Design:** Design layouts that adapt gracefully to various screen sizes and devices (mobile, tablet, desktop). Consider "mobile-first" or "desktop-first" approaches as appropriate for the project.
+  - **Modern Aesthetics & Polish:**
+    - Strive for clean, contemporary, and visually engaging designs.
+    - Consider subtle animations, transitions, and micro-interactions that enhance user experience without being distracting or impairing performance.
+    - Ensure UI elements (buttons, inputs, cards, etc.) have a polished, high-quality feel.
+  - **User-Centric Approach:**
+    - Design with the end-user in mind. Prioritize usability, intuitiveness, and a positive user experience (UX).
+    - Anticipate user needs and potential points of confusion.
+  - **Consistency Across Components & Screens:**
+    - Ensure that similar elements are styled and behave consistently throughout the application.
+    - Maintain a consistent visual language (icons, imagery, terminology) and interaction patterns.
+  - **Communication & Rationale (Design Justification):**
+    - When proposing or implementing designs, clearly articulate the design decisions. Explain the rationale behind choices for fonts, colors, spacing, layout, and component selection.
+    - If unsure, or if multiple good options exist, present them to the user with visual examples (if possible through markdown or by describing) and explain the pros and cons of each.
+    - Be prepared to discuss and iterate on design choices based on user feedback.
+
+- **Error Handling and User Communication**
+  - Always relay error messages from the tools to the user.
+  - Clearly state which directory any commands will be run in, especially if using `cd`.
+  - If unsure about paths, **always ask the user for clarification.**
+  - **If `ui_spark_add_component` (or `run_terminal_cmd` used for component installation) is interrupted by an interactive package manager prompt (e.g., for peer dependencies), refer to the "Handling Interactive Prompts" subsection under the `ui_spark_add_component` workflow for guidance.**
+
+- **Full Keyword List from UI Component Catalog**
+  - The following is a comprehensive list of all unique keywords currently present in the @ui-component-catalog.json. This list can be used to understand the range of searchable terms when using the `ui_spark_browse_catalog` tool with the `search` parameter.
+  - 3d
+  - anchor
+  - animate
+  - animated
+  - animated text
+  - animation
+  - apple
+  - arrow
+  - attention
+  - aurora
+  - aware
+  - background
+  - banner
+  - bar
+  - battle
+  - beam
+  - beams
+  - bento
+  - blur
+  - border
+  - bounds
+  - boxes
+  - button
+  - call to action
+  - canvas
+  - card
+  - cards
+  - carousel
+  - children
+  - click
+  - code
+  - codeblock
+  - collision
+  - colourful
+  - colours
+  - columns
+  - complex
+  - compound
+  - configurable
+  - container
+  - content
+  - content highlight
+  - cool
+  - cta
+  - cta highlight
+  - cursor
+  - customizable
+  - dark
+  - decorative
+  - description
+  - directions
+  - dock
+  - dot
+  - dots
+  - drag
+  - draggable
+  - drop
+  - dynamic
+  - dynamic content
+  - dynamic layout
+  - effect
+  - effects
+  - elegant
+  - element
+  - elevation
+  - encrypted
+  - expand
+  - expandable
+  - exploding
+  - fade
+  - feature
+  - feature showcase
+  - file
+  - filter
+  - flip
+  - floating
+  - focus
+  - focus effect
+  - following
+  - form
+  - framer
+  - full
+  - generate
+  - gemini
+  - github
+  - glare
+  - globe
+  - glowing
+  - google
+  - gradient
+  - grid
+  - grids
+  - header
+  - headers
+  - hero
+  - hero background
+  - hero text
+  - hide
+  - highlight
+  - highlighter
+  - homepage
+  - hover
+  - hover animation
+  - image
+  - images
+  - implementation
+  - information
+  - input
+  - interactive
+  - interactive background
+  - interactive elements
+  - interval
+  - introduction
+  - keyboard
+  - label
+  - lamp
+  - landing page
+  - landing page background
+  - landing page headline
+  - landing page highlight element
+  - landing page testimonials
+  - layout
+  - lens
+  - lights
+  - linear
+  - lines
+  - link
+  - links
+  - list
+  - load
+  - loader
+  - logo scroller
+  - loop
+  - macos
+  - map
+  - marquee
+  - marketing
+  - mask
+  - menu
+  - meteors
+  - micro
+  - microinteractions
+  - minimal
+  - mobile
+  - modal
+  - mode
+  - motion
+  - mouse
+  - mouse effect
+  - mousemove
+  - move
+  - moving
+  - multi
+  - navbar
+  - navigation
+  - opacity
+  - opposite
+  - out
+  - outline
+  - page
+  - parallax
+  - path
+  - paths
+  - pattern
+  - perspective
+  - pin
+  - placeholder
+  - pointer
+  - position
+  - preview
+  - product
+  - programmatic
+  - quote
+  - radial
+  - react
+  - registration
+  - resizable
+  - responsive
+  - reveal
+  - rotate
+  - rotation
+  - scale
+  - screens
+  - scroll
+  - scroll animation
+  - scrolling effect
+  - section
+  - sections
+  - simple
+  - signup
+  - skewed
+  - sleek
+  - slide
+  - slider
+  - smooth
+  - social proof
+  - southern
+  - space
+  - sparkles
+  - specialty
+  - speed
+  - spotlight
+  - stack
+  - stand
+  - standalone
+  - starry
+  - stars
+  - step
+  - sticky
+  - submit
+  - subtle
+  - subtle animation
+  - svg
+  - switch
+  - syntax
+  - tabs
+  - tailwind
+  - tags
+  - testimonials
+  - tested
+  - text
+  - tiltable
+  - time
+  - timeline
+  - title
+  - tooltip
+  - top
+  - tracing
+  - transitions
+  - translate
+  - translation
+  - typed
+  - typewriter
+  - ui controls
+  - ui pattern
+  - upload
+  - user input
+  - vanish
+  - videos
+  - view
+  - visual effect
+  - visual guide
+  - vortex
+  - wave
+  - waves
+  - wavy
+  - web design
+  - website
+  - width
+  - wobble
+  - words
+  - world
+  - wrap
+  - zoom

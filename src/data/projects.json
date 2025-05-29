@@ -1,248 +1,145 @@
 [
-    {
-        "title": "Vibe Type",
-        "description": "A typing application focused on creating good vibes and improving typing skills.",
-        "image": "/portfolio/vibetype.jpg",
-        "tags": [
-            "TypeScript",
-            "React",
-            "CSS"
-        ],
-        "industry": "AI/ML",
-        "outcomes": [
-            "Engaging user experience",
-            "Skill improvement metrics"
-        ],
-        "link": "https://vibetype.io"
-    },
-    {
-        "title": "Airseek.io",
-        "description": "Airsoft price comparison tool tracking deals across major retailers.",
-        "image": "/portfolio/airseek.jpg",
-        "tags": [
-            "TypeScript",
-            "Next.js",
-            "API Integration"
-        ],
-        "industry": "E-commerce",
-        "outcomes": [
-            "Real-time price tracking",
-            "Deal aggregation system"
-        ],
-        "link": "http://airseek.io"
-    },
-    {
-        "title": "Eco Green Nosara",
-        "description": "Booking website for an eco-tourism company in Nosara, Costa Rica.",
-        "image": "/portfolio/ecogreen.jpg",
-        "tags": [
-            "TypeScript",
-            "Next.js",
-            "Tailwind"
-        ],
-        "industry": "Tourism",
-        "outcomes": [
-            "Streamlined booking process",
-            "Instagram-style photo gallery"
-        ],
-        "link": "https://ecogreen-six.vercel.app/"
-    },
-    {
-        "title": "Nice'n Tight Sportfishing",
-        "description": "Booking website showcasing premium Costa Rican fishing charters.",
-        "image": "/portfolio/nicentight.jpg",
-        "tags": [
-            "TypeScript",
-            "Next.js",
-            "Tailwind"
-        ],
-        "industry": "Tourism",
-        "outcomes": [
-            "Increased charter bookings",
-            "Enhanced photo showcase"
-        ],
-        "link": "https://nicentightcr.com"
-    },
-    {
-        "title": "PetPortraitAI",
-        "description": "AI-powered mobile app for capturing perfect pet photos with intelligent sound systems.",
-        "image": "/portfolio/petportrait.jpg",
-        "tags": [
-            "TypeScript",
-            "React Native",
-            "AI/ML"
-        ],
-        "industry": "Consumer",
-        "outcomes": [
-            "Advanced pet photo detection",
-            "Intelligent sound system integration"
-        ],
-        "link": "https://petportrait.app"
-    },
-    {
-        "title": "BetterThumbnails.com",
-        "description": "AI tool that evaluates video thumbnails to provide creators with actionable improvements.",
-        "image": "/portfolio/betterthumbnails.jpg",
-        "tags": [
-            "TypeScript",
-            "Next.js",
-            "Computer Vision"
-        ],
-        "industry": "Media",
-        "outcomes": [
-            "Thumbnail quality metrics",
-            "Higher creator CTRs"
-        ],
-        "link": "https://betterthumbnails.com"
-    },
-    {
-        "title": "VisionaryAI",
-        "description": "AI-powered image and video generation with face swap capabilities.",
-        "image": "/portfolio/visionaryai.jpg",
-        "tags": [
-            "JavaScript",
-            "TensorFlow.js",
-            "WebGL"
-        ],
-        "industry": "Media",
-        "outcomes": [
-            "High-quality image generation",
-            "Advanced face swap technology"
-        ]
-    },
-    {
-        "title": "Compass Frontend",
-        "description": "Clean, minimal Next.js + Chakra UI interface transforming Scribe documentation into executable test cases.",
-        "image": "/portfolio/compassfrontend.jpg",
-        "tags": [
-            "TypeScript",
-            "Next.js",
-            "Chakra UI"
-        ],
-        "industry": "Developer Tools",
-        "outcomes": [
-            "Streamlined test creation",
-            "Improved developer experience"
-        ]
-    },
-    {
-        "title": "Compass Backend",
-        "description": "Express and MongoDB-powered API that parses Scribe HTML, generates Playwright tests, and manages execution.",
-        "image": "/portfolio/compassbackend.jpg",
-        "tags": [
-            "JavaScript",
-            "Express",
-            "MongoDB"
-        ],
-        "industry": "Developer Tools",
-        "outcomes": [
-            "Automated test generation",
-            "Seamless execution management"
-        ]
-    },
-    {
-        "title": "Insurance Company Website",
-        "description": "Single page website for an unnamed insurance company.",
-        "image": "/portfolio/insurance.jpg",
-        "tags": [
-            "HTML",
-            "CSS",
-            "JavaScript"
-        ],
-        "industry": "Insurance",
-        "outcomes": [
-            "Clean, professional design",
-            "Lead generation forms"
-        ]
-    },
-    {
-        "title": "TPG Studios",
-        "description": "E-commerce platform offering seamless shopping experiences, real-time updates, and secure payments.",
-        "image": "/portfolio/tpgstudios.jpg",
-        "tags": [
-            "Svelte",
-            "SvelteKit",
-            "Stripe"
-        ],
-        "industry": "E-commerce",
-        "outcomes": [
-            "Seamless shopping experience",
-            "Secure payment integration"
-        ]
-    },
-    {
-        "title": "Luxury Time PC",
-        "description": "A responsive watches website built using HTML, CSS, and JavaScript.",
-        "image": "/portfolio/luxurytime.jpg",
-        "tags": [
-            "HTML",
-            "CSS",
-            "JavaScript"
-        ],
-        "industry": "Retail",
-        "outcomes": [
-            "Responsive product showcase",
-            "Elegant shopping experience"
-        ]
-    },
-    {
-        "title": "Humble Bee Ice Cream",
-        "description": "Website for an artisanal ice cream company with a focus on natural ingredients.",
-        "image": "/portfolio/humblebee.jpg",
-        "tags": [
-            "SCSS",
-            "JavaScript",
-            "Responsive Design"
-        ],
-        "industry": "Food & Beverage",
-        "outcomes": [
-            "Engaging product showcase",
-            "Location-based store finder"
-        ]
-    },
-    {
-        "title": "Evergreen Solutions",
-        "description": "Business landing page for sustainable agriculture solutions company.",
-        "image": "/portfolio/evergreen.jpg",
-        "tags": [
-            "HTML",
-            "CSS",
-            "JavaScript"
-        ],
-        "industry": "Agriculture",
-        "outcomes": [
-            "Clear service offerings",
-            "Sustainability messaging"
-        ]
-    },
-    {
-        "title": "Volare Solutions",
-        "description": "SvelteKit and Supabase-powered website crafting dynamic web experiences for client engagement.",
-        "image": "/portfolio/volare.jpg",
-        "tags": [
-            "Svelte",
-            "SvelteKit",
-            "Supabase"
-        ],
-        "industry": "Technology",
-        "outcomes": [
-            "Dynamic web experiences",
-            "Efficient client engagement"
-        ]
-    },
-    {
-        "title": "Sculpta.art",
-        "description": "E-commerce platform for 3D printing artists and creators to sell their designs.",
-        "image": "/portfolio/sculpta.jpg",
-        "tags": [
-            "Svelte",
-            "SvelteKit",
-            "3D Rendering"
-        ],
-        "industry": "E-commerce",
-        "outcomes": [
-            "3D model previews",
-            "Artist marketplace system"
-        ]
-    }
+  {
+    "title": "Vibe Type",
+    "description": "A typing application focused on creating good vibes and improving typing skills.",
+    "image": "/portfolio/vibetype.jpg",
+    "tags": ["TypeScript", "React", "CSS"],
+    "industry": "AI/ML",
+    "outcomes": ["Engaging user experience", "Skill improvement metrics"],
+    "link": "https://vibetype.io"
+  },
+  {
+    "title": "Airseek.io",
+    "description": "Airsoft price comparison tool tracking deals across major retailers.",
+    "image": "/portfolio/airseek.jpg",
+    "tags": ["TypeScript", "Next.js", "API Integration"],
+    "industry": "E-commerce",
+    "outcomes": ["Real-time price tracking", "Deal aggregation system"],
+    "link": "http://airseek.io"
+  },
+  {
+    "title": "Eco Green Nosara",
+    "description": "Booking website for an eco-tourism company in Nosara, Costa Rica.",
+    "image": "/portfolio/ecogreen.jpg",
+    "tags": ["TypeScript", "Next.js", "Tailwind"],
+    "industry": "Tourism",
+    "outcomes": [
+      "Streamlined booking process",
+      "Instagram-style photo gallery"
+    ],
+    "link": "https://ecogreen-six.vercel.app/"
+  },
+  {
+    "title": "Nice'n Tight Sportfishing",
+    "description": "Booking website showcasing premium Costa Rican fishing charters.",
+    "image": "/portfolio/nicentight.jpg",
+    "tags": ["TypeScript", "Next.js", "Tailwind"],
+    "industry": "Tourism",
+    "outcomes": ["Increased charter bookings", "Enhanced photo showcase"],
+    "link": "https://nicentightcr.com"
+  },
+  {
+    "title": "PetPortraitAI",
+    "description": "AI-powered mobile app for capturing perfect pet photos with intelligent sound systems.",
+    "image": "/portfolio/petportrait.jpg",
+    "tags": ["TypeScript", "React Native", "AI/ML"],
+    "industry": "Consumer",
+    "outcomes": [
+      "Advanced pet photo detection",
+      "Intelligent sound system integration"
+    ],
+    "link": "https://petportrait.app"
+  },
+  {
+    "title": "BetterThumbnails.com",
+    "description": "AI tool that evaluates video thumbnails to provide creators with actionable improvements.",
+    "image": "/portfolio/betterthumbnails.jpg",
+    "tags": ["TypeScript", "Next.js", "Computer Vision"],
+    "industry": "Media",
+    "outcomes": ["Thumbnail quality metrics", "Higher creator CTRs"],
+    "link": "https://betterthumbnails.com"
+  },
+  {
+    "title": "VisionaryAI",
+    "description": "AI-powered image and video generation with face swap capabilities.",
+    "image": "/portfolio/vibetype.jpg",
+    "tags": ["JavaScript", "TensorFlow.js", "WebGL"],
+    "industry": "Media",
+    "outcomes": [
+      "High-quality image generation",
+      "Advanced face swap technology"
+    ]
+  },
+  {
+    "title": "Compass Frontend",
+    "description": "Clean, minimal Next.js + Chakra UI interface transforming Scribe documentation into executable test cases.",
+    "image": "/portfolio/airseek.jpg",
+    "tags": ["TypeScript", "Next.js", "Chakra UI"],
+    "industry": "Developer Tools",
+    "outcomes": ["Streamlined test creation", "Improved developer experience"]
+  },
+  {
+    "title": "Compass Backend",
+    "description": "Express and MongoDB-powered API that parses Scribe HTML, generates Playwright tests, and manages execution.",
+    "image": "/portfolio/ecogreen.jpg",
+    "tags": ["JavaScript", "Express", "MongoDB"],
+    "industry": "Developer Tools",
+    "outcomes": ["Automated test generation", "Seamless execution management"]
+  },
+  {
+    "title": "Insurance Company Website",
+    "description": "Single page website for an unnamed insurance company.",
+    "image": "/portfolio/betterthumbnails.jpg",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "industry": "Insurance",
+    "outcomes": ["Clean, professional design", "Lead generation forms"]
+  },
+  {
+    "title": "TPG Studios",
+    "description": "E-commerce platform offering seamless shopping experiences, real-time updates, and secure payments.",
+    "image": "/portfolio/vibetype.jpg",
+    "tags": ["Svelte", "SvelteKit", "Stripe"],
+    "industry": "E-commerce",
+    "outcomes": ["Seamless shopping experience", "Secure payment integration"]
+  },
+  {
+    "title": "Luxury Time PC",
+    "description": "A responsive watches website built using HTML, CSS, and JavaScript.",
+    "image": "/portfolio/petportrait.jpg",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "industry": "Retail",
+    "outcomes": ["Responsive product showcase", "Elegant shopping experience"]
+  },
+  {
+    "title": "Humble Bee Ice Cream",
+    "description": "Website for an artisanal ice cream company with a focus on natural ingredients.",
+    "image": "/portfolio/nicentight.jpg",
+    "tags": ["SCSS", "JavaScript", "Responsive Design"],
+    "industry": "Food & Beverage",
+    "outcomes": ["Engaging product showcase", "Location-based store finder"]
+  },
+  {
+    "title": "Evergreen Solutions",
+    "description": "Business landing page for sustainable agriculture solutions company.",
+    "image": "/portfolio/ecogreen.jpg",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "industry": "Agriculture",
+    "outcomes": ["Clear service offerings", "Sustainability messaging"]
+  },
+  {
+    "title": "Volare Solutions",
+    "description": "SvelteKit and Supabase-powered website crafting dynamic web experiences for client engagement.",
+    "image": "/portfolio/vibetype.jpg",
+    "tags": ["Svelte", "SvelteKit", "Supabase"],
+    "industry": "Technology",
+    "outcomes": ["Dynamic web experiences", "Efficient client engagement"]
+  },
+  {
+    "title": "Sculpta.art",
+    "description": "E-commerce platform for 3D printing artists and creators to sell their designs.",
+    "image": "/portfolio/nicentight.jpg",
+    "tags": ["Svelte", "SvelteKit", "3D Rendering"],
+    "industry": "E-commerce",
+    "outcomes": ["3D model previews", "Artist marketplace system"]
+  }
 ]

@@ -2,40 +2,119 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-black: #000000;
-  --primary-gray: #2e3440;
-  --primary-space-gray: #343a40;
-  --primary-light-gray: #e9ecef;
-  --primary-orange: #FFA500;
-  --primary-sunset: #ff7e5f;
+/* :root { */
+/* These custom variables might be clashing or are not used by shadcn's system */
+/* --primary-black: #000000; */
+/* --primary-gray: #2e3440; */
+/* --primary-space-gray: #343a40; */
+/* --primary-light-gray: #e9ecef; */
+/* --primary-orange: #FFA500; */
+/* --primary-sunset: #ff7e5f; */
+/* } */
+
+/* REMOVE or COMMENT OUT this body style that overrides shadcn/ui theme variables */
+/* @layer base { */
+/*   body { */
+/*     @apply bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100 min-h-screen; */
+/*   } */
+/*    */
+/*   h1, h2, h3, h4, h5, h6 { */
+/*     @apply font-inter; */ /* This can be kept if Inter is your primary font, or managed in layout.tsx */
+/*   } */
+/*    */
+/* Custom Scrollbar - These are fine */
+/*   ::-webkit-scrollbar { */
+/*     width: 10px; */
+/*   } */
+/*    */
+/*   ::-webkit-scrollbar-track { */
+/*     @apply bg-gray-800; */ /* Will need dark mode variant if kept */
+/*   } */
+/*    */
+/*   ::-webkit-scrollbar-thumb { */
+/*     @apply bg-gray-700 rounded-full; */ /* Will need dark mode variant if kept */
+/*     border: 2px solid theme('colors.gray.800'); */ /* Will need dark mode variant if kept */
+/*   } */
+/*    */
+/*   ::-webkit-scrollbar-thumb:hover { */
+/*     @apply bg-gray-600; */ /* Will need dark mode variant if kept */
+/*   } */
+/* } */
+
+/* This is the correct :root and .dark setup for shadcn/ui themes */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
   body {
-    @apply bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100 min-h-screen;
+    @apply bg-background text-foreground;
+    /* Ensure Inter font is applied, or manage in layout.tsx */
+    /* @apply font-inter; */ /* This was in the conflicting rule, re-evaluate if needed here or in layout */
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-inter;
-  }
-  
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    @apply bg-gray-800;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    @apply bg-gray-700 rounded-full;
-    border: 2px solid theme('colors.gray.800');
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-600;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* If Inter is globally desired for headings, this is a good place */
+    @apply font-sans; /* Or your desired heading font if different from body */
   }
 }
 
@@ -43,27 +122,27 @@
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .floating {
     animation: floating 6s ease-in-out infinite;
   }
-  
+
   .floating-delayed {
     animation: floating 6s ease-in-out 2s infinite;
   }
-  
+
   .floating-slow {
     animation: floating 8s ease-in-out infinite;
   }
-  
+
   .glow {
     box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
   }
-  
+
   .space-card {
     @apply bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-xl shadow-xl backdrop-blur-sm;
   }
-  
+
   .glass-effect {
     @apply bg-gray-900/60 backdrop-blur-md border border-gray-800;
   }
@@ -82,7 +161,7 @@
 }
 
 .palm-bg {
-  background-image: url('/palm-silhouette.png');
+  background-image: url("/palm-silhouette.png");
   background-position: bottom right;
   background-repeat: no-repeat;
   background-size: 350px;
@@ -118,3 +197,8 @@
   width: 100%;
   height: 100%;
 }
+
+/* Custom Scrollbar - Consider making these themeable too */
+/* For example: */
+/* ::-webkit-scrollbar-track { @apply bg-muted; } */
+/* ::-webkit-scrollbar-thumb { @apply bg-primary; } */
