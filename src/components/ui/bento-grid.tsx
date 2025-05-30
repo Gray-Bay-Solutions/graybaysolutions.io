@@ -10,8 +10,8 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[18rem] md:grid-cols-3",
-        className,
+        "mx-auto grid max-w-7xl grid-cols-1 gap-3 md:auto-rows-[14rem] md:grid-cols-3",
+        className
       )}
     >
       {children}
@@ -35,19 +35,28 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-neutral-200 bg-white p-4 transition duration-200 hover:shadow-xl dark:border-white/[0.2] dark:bg-black dark:shadow-none",
-        className,
+        "group/bento relative flex flex-col justify-start space-y-3 overflow-hidden rounded-2xl border border-transparent dark:border-neutral-800/50 bg-neutral-900/70 p-4 shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] hover:border-neutral-700/70 hover:bg-neutral-800/80 hover:shadow-2xl",
+        className
       )}
     >
-      {header}
-      <div className="transition duration-200 group-hover/bento:translate-x-2">
-        {icon}
-        <div className="mt-2 mb-2 font-sans font-bold text-neutral-600 dark:text-neutral-200">
-          {title}
+      {header && (
+        <div className="flex-grow flex items-center justify-center mb-2">
+          {header}
         </div>
-        <div className="font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300">
-          {description}
-        </div>
+      )}
+
+      <div className="transition-all duration-200">
+        {icon && <div className="mb-1">{icon}</div>}
+        {title && (
+          <div className="mb-1 font-sans text-base font-semibold text-neutral-100 dark:text-neutral-50">
+            {title}
+          </div>
+        )}
+        {description && (
+          <div className="font-sans text-xs font-normal text-neutral-400 dark:text-neutral-300/80 leading-snug">
+            {description}
+          </div>
+        )}
       </div>
     </div>
   );

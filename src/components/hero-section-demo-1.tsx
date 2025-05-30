@@ -4,11 +4,9 @@ import { motion } from "framer-motion";
 import { scrollToSection } from "@/lib/utils";
 import { FlipWords } from "@/components/ui/flip-words";
 import Image from "next/image";
-import {
-  Carousel,
-  Card as AppleCard,
-  CardType as AppleCardType,
-} from "@/components/ui/apple-cards-carousel";
+import { BentoGridThirdDemo } from "@/components/ui/bento-grid-2";
+import { cn } from "@/lib/utils";
+import { ContainerTextFlip } from "./ui/container-text-flip";
 
 interface HeroSectionOneProps {
   headlineStart: string;
@@ -25,7 +23,6 @@ interface HeroSectionOneProps {
     width: number;
     height: number;
   }>;
-  carouselCardsData?: AppleCardType[];
 }
 
 export default function HeroSectionOne({
@@ -49,12 +46,7 @@ export default function HeroSectionOne({
     { name: "Vercel", logo: "/logos/vercel.svg", width: 80, height: 25 },
     { name: "Supabase", logo: "/logos/supabase.svg", width: 80, height: 30 },
   ],
-  carouselCardsData = [],
 }: HeroSectionOneProps) {
-  const carouselItems = carouselCardsData.map((cardData, idx) => (
-    <AppleCard key={cardData.id || idx} card={cardData} index={idx} layout />
-  ));
-
   return (
     <div className="relative text-white min-h-[calc(100vh-80px)] flex flex-col justify-center items-center py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full max-w-screen-xl mx-auto">
@@ -65,12 +57,12 @@ export default function HeroSectionOne({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-block bg-gray-800 text-sm text-gray-300 px-4 py-1.5 rounded-full mb-6 shadow-md">
+            <div className="inline-block bg-gray-800/70 backdrop-blur-sm text-sm text-gray-200 px-4 py-1.5 rounded-full mb-6 shadow-md">
               Introducing GrayBay Solutions
             </div>
-            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 break-words">
+            <div className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 break-words">
               {headlineStart}
-              <FlipWords
+              <ContainerTextFlip
                 words={flipWords}
                 className="text-orange-500 dark:text-orange-400"
               />
@@ -96,7 +88,7 @@ export default function HeroSectionOne({
             {secondaryCtaText && secondaryCtaLink && (
               <button
                 onClick={() => scrollToSection(secondaryCtaLink)}
-                className="w-full sm:w-auto bg-gray-800 text-white px-8 py-3.5 text-base font-semibold rounded-lg border border-gray-700 shadow-sm hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-black"
+                className="w-full sm:w-auto bg-neutral-800/80 hover:bg-neutral-700/90 backdrop-blur-sm text-white px-8 py-3.5 text-base font-semibold rounded-lg border border-neutral-700 shadow-sm transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-black"
               >
                 {secondaryCtaText}
               </button>
@@ -104,22 +96,14 @@ export default function HeroSectionOne({
           </motion.div>
         </div>
 
-        {/* Right Column: Apple Cards Carousel */}
+        {/* Right Column: Infographic Bento Grid */}
         <motion.div
-          className="lg:w-1/2 mt-16 lg:mt-0 flex justify-center items-center w-full lg:pl-10 xl:pl-16"
+          className="lg:w-1/2 mt-16 lg:mt-0 flex justify-center items-center w-full"
           initial={{ opacity: 0, scale: 0.95, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
-          {carouselItems.length > 0 ? (
-            <div className="w-full max-w-2xl lg:max-w-none">
-              <Carousel items={carouselItems} />
-            </div>
-          ) : (
-            <div className="w-full h-[400px] lg:h-[500px] bg-gray-900/50 rounded-lg flex items-center justify-center text-gray-500">
-              <p>No solutions to display in carousel.</p>
-            </div>
-          )}
+          <BentoGridThirdDemo />
         </motion.div>
       </div>
 

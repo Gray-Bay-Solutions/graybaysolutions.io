@@ -74,7 +74,7 @@ export const HeroParallax = ({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="container mx-auto px-4 text-center mb-12 mt-60"
+        className="container mx-auto px-4 text-center mb-12 mt-32"
       >
         <Badge
           variant="outline"

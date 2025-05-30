@@ -28,9 +28,16 @@ import {
   IconWorldWww,
   IconDeviceMobile,
   IconBulb,
+  IconSparkles,
+  IconBoxAlignRightFilled,
+  IconClipboardCopy,
+  IconFileBroken,
+  IconSignature,
+  IconTableColumn,
+  IconAdjustments,
+  IconTools,
 } from "@tabler/icons-react";
 import Image from "next/image";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"; // Re-import BentoGrid components
 import { WobbleCard } from "@/components/ui/wobble-card";
 import { cn, scrollToSection } from "@/lib/utils";
 import React from "react";
@@ -60,7 +67,6 @@ import {
   Project,
   ParallaxProduct,
 } from "@/types"; // Import types
-import { CardType as AppleCardType } from "@/components/ui/apple-cards-carousel"; // Import AppleCardType
 
 // Updated Nav Items from old Navigation component
 const navItems: NavItem[] = [
@@ -123,103 +129,51 @@ const heroTechLogos = [
   // { name: "Framer Motion", logo: "/logos/framer.svg", width: 70, height: 25 },
 ];
 
-// Updated Services data
+// Updated Services data with concise descriptions for Bento Grid
 const servicesData: ServiceItem[] = [
   {
     id: "web-dev",
     title: "Website Development",
-    description:
-      "Custom, responsive websites built with modern technologies that provide exceptional user experiences and drive conversions. We focus on performance, accessibility, and scalability to ensure your online presence is robust and future-proof.",
-    icon: (
-      <IconDeviceLaptop
-        size={48} // Ensuring size for modal display
-        className="text-orange-400 group-hover:text-white transition-colors duration-200"
-      />
-    ),
+    description: "Modern, responsive sites that drive conversions.", // Made concise
+    icon: <IconDeviceLaptop size={64} className="text-orange-400" />,
   },
   {
     id: "seo-dm",
     title: "SEO & Digital Marketing",
-    description:
-      "Strategic optimization to improve your visibility online and connect with your target audience when they need you most. Our data-driven approach covers on-page, off-page, and technical SEO, along with content marketing and PPC campaigns.",
-    icon: (
-      <IconBuildingArch
-        size={48}
-        className="text-orange-400 group-hover:text-white transition-colors duration-200"
-      />
-    ),
+    description: "Boost online visibility and connect with your audience.", // Made concise
+    icon: <IconBuildingArch size={64} className="text-orange-400" />,
   },
   {
     id: "booking-sys",
     title: "Automated Booking Systems",
-    description:
-      "Streamline your appointment scheduling with intelligent booking solutions that integrate with your existing workflow. Reduce no-shows, save administrative time, and provide a seamless booking experience for your clients.",
-    icon: (
-      <IconBriefcase
-        size={48}
-        className="text-orange-400 group-hover:text-white transition-colors duration-200"
-      />
-    ),
+    description: "Streamline scheduling, save time, enhance client experience.", // Made concise
+    icon: <IconBriefcase size={64} className="text-orange-400" />,
   },
   {
     id: "crm-int",
     title: "CRM Integration",
-    description:
-      "Connect your customer data across platforms to create unified experiences and improve operational efficiency. We help you choose, implement, and customize CRM systems that fit your business processes perfectly.",
-    icon: (
-      <IconUser
-        size={48}
-        className="text-orange-400 group-hover:text-white transition-colors duration-200"
-      />
-    ),
+    description: "Unified customer data for improved operational efficiency.", // Made concise
+    icon: <IconUser size={64} className="text-orange-400" />,
   },
   {
     id: "ai-solutions",
     title: "AI-Powered Solutions",
-    description:
-      "Intelligent automation and customer service tools that learn from interactions to provide better experiences. Leverage AI for chatbots, data analysis, personalized recommendations, and process optimization.",
-    icon: (
-      <IconHome // Consider changing to a more AI-specific icon like IconBrain or IconSparkles
-        size={48}
-        className="text-orange-400 group-hover:text-white transition-colors duration-200"
-      />
-    ),
+    description: "Intelligent automation for superior customer experiences.", // Made concise
+    icon: <IconBulb size={64} className="text-orange-400" />, // Changed icon to IconBulb for AI
   },
   {
     id: "mobile-app-dev",
     title: "Mobile App Development",
-    description:
-      "Native and cross-platform mobile applications that deliver seamless user experiences on iOS and Android devices. From concept to launch and beyond, we build apps that engage users and achieve business objectives.",
-    icon: (
-      <IconDeviceMobile
-        size={48}
-        className="text-orange-400 group-hover:text-white transition-colors duration-200"
-      />
-    ),
+    description: "Seamless iOS & Android apps that engage users.", // Made concise
+    icon: <IconDeviceMobile size={64} className="text-orange-400" />,
   },
   {
     id: "custom-solutions",
     title: "Custom Software Solutions",
-    description:
-      "Tailored software applications, system integrations, and automation tools designed to meet your unique business challenges and goals. We develop scalable, maintainable, and secure software from scratch.",
-    icon: (
-      <IconBulb
-        size={48}
-        className="text-orange-400 group-hover:text-white transition-colors duration-200"
-      />
-    ),
+    description: "Tailored applications for unique business challenges.", // Made concise
+    icon: <IconSparkles size={64} className="text-orange-400" />, // Changed icon to IconSparkles
   },
 ];
-
-// Transform servicesData for Apple Cards Carousel
-const carouselCardsData: AppleCardType[] = servicesData.map((service) => ({
-  id: service.id,
-  src: `https://placehold.co/600x400/1e1b4b/f97316?text=${encodeURIComponent(service.title.split(" ")[0])}`,
-  title: service.title,
-  category: "Our Solutions", // Or you can make this dynamic, e.g., service.category if you add it
-  content: service.description,
-  icon: service.icon, // Pass the icon directly
-}));
 
 // Updated Team Members data
 const teamMembersData: TeamMember[] = [
@@ -280,7 +234,7 @@ const parallaxProductsData: ParallaxProduct[] = portfolioData.map(
 export default function NewLandingPage() {
   return (
     <AuroraBackground>
-      <div className="relative z-10 min-h-screen flex flex-col" id="home">
+      <div className="relative z-1 min-h-screen flex flex-col" id="home">
         <FloatingNav navItems={navItems} className="top-5" />
 
         <main className="flex-grow">
@@ -294,7 +248,6 @@ export default function NewLandingPage() {
             secondaryCtaText={heroSecondaryCtaText}
             secondaryCtaLink={heroSecondaryCtaLink}
             techLogos={heroTechLogos}
-            carouselCardsData={carouselCardsData} // Pass the new data here
           />
           {/* Services Section - Now a separate component */}
           <ServicesSection services={servicesData} />

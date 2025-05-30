@@ -10,7 +10,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-12 sm:py-16 md:py-24 bg-neutral-900/90 dark:bg-black/90 backdrop-blur-sm"
+      className="py-8 sm:py-8 md:py-8 bg-neutral-900/90 dark:bg-black/90 backdrop-blur-sm"
     >
       <div className="container mx-auto px-4">
         <motion.div

@@ -18,7 +18,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   return (
     <section
       id="portfolio"
-      className="py-10 sm:py-12 md:py-20 bg-neutral-900/90 dark:bg-black/90 backdrop-blur-sm"
+      className="py-8 sm:py-8 md:py-8 bg-neutral-900/90 dark:bg-black/90 backdrop-blur-sm"
     >
       <HeroParallax products={products} showDefaultHeader={false} />
     </section>
