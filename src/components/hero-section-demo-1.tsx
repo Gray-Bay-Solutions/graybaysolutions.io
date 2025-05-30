@@ -2,11 +2,10 @@
 
 import { motion } from "framer-motion";
 import { scrollToSection } from "@/lib/utils";
-import { FlipWords } from "@/components/ui/flip-words";
 import Image from "next/image";
 import { BentoGridThirdDemo } from "@/components/ui/bento-grid-2";
-import { cn } from "@/lib/utils";
 import { ContainerTextFlip } from "./ui/container-text-flip";
+import { ScrollDownIndicator } from "@/components/ui/ScrollDownIndicator";
 
 interface HeroSectionOneProps {
   headlineStart: string;
@@ -57,20 +56,25 @@ export default function HeroSectionOne({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-block bg-gray-800/70 backdrop-blur-sm text-sm text-gray-200 px-4 py-1.5 rounded-full mb-6 shadow-md">
-              Introducing GrayBay Solutions
+            <div className="inline-block bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 px-5 py-2 rounded-full mb-6 shadow-sm text-sm">
+              Introducing{" "}
+              <span className="text-orange-500 dark:text-orange-400 font-bold pl-1">
+                GrayBaySolutions
+              </span>
             </div>
-            <div className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 break-words">
+            <div className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 break-words text-black dark:text-white">
               {headlineStart}
-              <ContainerTextFlip
-                words={flipWords}
-                className="text-orange-500 dark:text-orange-400"
-              />
+              <span>
+                <ContainerTextFlip
+                  words={flipWords}
+                  className="text-orange-500 dark:text-orange-400"
+                />
+              </span>
               {headlineEnd}
             </div>
-            <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-xl mx-auto lg:mx-0">
+            <div className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 mb-10 max-w-xl mx-auto lg:mx-0">
               {subheading}
-            </p>
+            </div>
           </motion.div>
 
           <motion.div
@@ -81,14 +85,14 @@ export default function HeroSectionOne({
           >
             <button
               onClick={() => scrollToSection(primaryCtaLink)}
-              className="w-full sm:w-auto bg-white text-black px-8 py-3.5 text-base font-semibold rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black"
+              className="w-full sm:w-auto bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-orange-500 dark:text-white dark:hover:bg-orange-600 px-8 py-3.5 text-base font-semibold rounded-lg shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950"
             >
               {primaryCtaText}
             </button>
             {secondaryCtaText && secondaryCtaLink && (
               <button
                 onClick={() => scrollToSection(secondaryCtaLink)}
-                className="w-full sm:w-auto bg-neutral-800/80 hover:bg-neutral-700/90 backdrop-blur-sm text-white px-8 py-3.5 text-base font-semibold rounded-lg border border-neutral-700 shadow-sm transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-black"
+                className="w-full sm:w-auto bg-white text-neutral-900 border border-neutral-300 hover:bg-neutral-100 dark:bg-neutral-900 dark:text-white dark:border-neutral-800 dark:hover:bg-neutral-700 px-8 py-3.5 text-base font-semibold rounded-lg shadow-sm transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950"
               >
                 {secondaryCtaText}
               </button>
@@ -98,7 +102,7 @@ export default function HeroSectionOne({
 
         {/* Right Column: Infographic Bento Grid */}
         <motion.div
-          className="lg:w-1/2 mt-16 lg:mt-0 flex justify-center items-center w-full"
+          className="lg:w-1/2 mt-40 lg:mt-0 flex justify-center items-center w-full"
           initial={{ opacity: 0, scale: 0.95, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -106,30 +110,7 @@ export default function HeroSectionOne({
           <BentoGridThirdDemo />
         </motion.div>
       </div>
-
-      {/* Bottom Row: Technology Logos */}
-      <motion.div
-        className="relative z-10 w-full max-w-screen-xl mx-auto mt-20 lg:mt-28 flex flex-wrap justify-center items-center gap-x-8 sm:gap-x-10 md:gap-x-12 gap-y-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-      >
-        {techLogos.map((tech) => (
-          <div
-            key={tech.name}
-            className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100 transform hover:scale-105 duration-300"
-            title={tech.name}
-          >
-            <Image
-              src={tech.logo}
-              alt={`${tech.name} logo`}
-              width={tech.width}
-              height={tech.height}
-              className="object-contain"
-            />
-          </div>
-        ))}
-      </motion.div>
+      <ScrollDownIndicator />
     </div>
   );
 }

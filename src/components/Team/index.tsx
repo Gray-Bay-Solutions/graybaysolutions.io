@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { FocusCards } from "@/components/ui/focus-cards";
 
 interface TeamMember {

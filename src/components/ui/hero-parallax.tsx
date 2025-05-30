@@ -65,7 +65,7 @@ export const HeroParallax = ({
     <div
       ref={ref}
       className={cn(
-        "h-[220vh] overflow-hidden antialiased relative flex flex-col [perspective:600px] [transform-style:preserve-3d]",
+        "h-[188vh] sm:h-[220vh] md:h-[200vh] lg:h-[188vh] sm:pt-8 md:pt-12 lg:pt-16 overflow-hidden antialiased relative flex flex-col [perspective:600px] [transform-style:preserve-3d]",
         className
       )}
     >
@@ -166,7 +166,7 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className="group/product h-80 w-full max-w-xs sm:max-w-none sm:h-96 sm:w-[26rem] md:w-[30rem] relative shrink-0 mb-4 sm:mb-0"
+      className="group/product h-64 w-full max-w-xs sm:max-w-none sm:h-80 sm:w-[20rem] md:w-[24rem] relative shrink-0 mb-4 sm:mb-0"
     >
       <a href={product.link} className="block group-hover/product:shadow-2xl ">
         <img

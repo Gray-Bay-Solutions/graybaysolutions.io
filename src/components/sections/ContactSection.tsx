@@ -8,10 +8,7 @@ import { LeadForm } from "@/components/LeadForm";
 
 export const ContactSection: React.FC = () => {
   return (
-    <section
-      id="contact"
-      className="py-8 sm:py-8 md:py-8 bg-neutral-900/90 dark:bg-black/90 backdrop-blur-sm"
-    >
+    <section id="contact" className="py-20 sm:py-24 md:py-28 w-full">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

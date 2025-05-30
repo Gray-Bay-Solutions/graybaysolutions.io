@@ -17,10 +17,7 @@ interface TeamSectionProps {
 
 export const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers }) => {
   return (
-    <section
-      id="team"
-      className="py-12 sm:py-16 md:py-24 bg-neutral-900/90 dark:bg-black/90 backdrop-blur-sm"
-    >
+    <section id="team" className="w-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -5,11 +5,15 @@ import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 import {
   IconBoxAlignRightFilled,
   IconClipboardCopy,
+  IconCpu,
   IconFileBroken,
   IconSignature,
-  IconTableColumn,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
+import Image from "next/image";
+import GeminiIcon from "../logos/GeminiIcon";
+import AnthropicIcon from "../logos/AnthropicIcon";
+import OpenAIIcon from "../logos/OpenAIIcon";
 
 export function BentoGridThirdDemo() {
   return (
@@ -62,24 +66,24 @@ const SkeletonOne = () => {
     >
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
+        className="flex flex-row rounded-full border border-neutral-200 dark:border-neutral-700 p-2  items-center space-x-2 bg-neutral-50 dark:bg-neutral-900"
       >
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-800" />
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
+        className="flex flex-row rounded-full border border-neutral-200 dark:border-neutral-700 p-2 items-center space-x-2 w-3/4 ml-auto bg-neutral-50 dark:bg-neutral-900"
       >
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-800" />
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
       </motion.div>
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-white dark:bg-black"
+        className="flex flex-row rounded-full border border-neutral-200 dark:border-neutral-700 p-2 items-center space-x-2 bg-neutral-50 dark:bg-neutral-900"
       >
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-800" />
       </motion.div>
     </motion.div>
   );
@@ -117,7 +121,7 @@ const SkeletonTwo = () => {
           style={{
             maxWidth: Math.random() * (100 - 40) + 40 + "%",
           }}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
+          className="flex flex-row rounded-full border border-neutral-200 dark:border-neutral-700 p-2  items-center space-x-2 bg-neutral-100 dark:bg-neutral-900 w-full h-4"
         ></motion.div>
       ))}
     </motion.div>
@@ -183,53 +187,43 @@ const SkeletonFour = () => {
     >
       <motion.div
         variants={first}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+        className="h-full w-1/3 rounded-2xl p-4 flex flex-col items-center justify-around shadow-2xl transition-shadow duration-300
+                   bg-gradient-to-br from-neutral-100 to-neutral-50 border border-neutral-200 hover:shadow-purple-500/30
+                   dark:from-neutral-800 dark:to-neutral-700 dark:border-neutral-600 dark:hover:shadow-purple-500/50"
       >
-        <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          Just code in Vanilla Javascript
+        <GeminiIcon className="w-12 h-12 mb-2" />
+        <p className="sm:text-lg text-md text-center font-bold text-neutral-700 dark:text-neutral-200">
+          Gemini
         </p>
-        <p className="border border-red-500 bg-red-100 dark:bg-red-900/20 text-red-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Delusional
+        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          Latest Model: PaLM 2
         </p>
       </motion.div>
-      <motion.div className="h-full relative z-20 w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center">
-        <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          Tailwind CSS is cool, you know
+      <motion.div
+        className="h-full relative z-20 w-1/3 rounded-2xl p-4 flex flex-col items-center justify-around shadow-2xl transition-shadow duration-300 
+                           bg-gradient-to-br from-neutral-100 to-neutral-50 border border-neutral-200 hover:shadow-green-500/30 
+                           dark:from-neutral-800 dark:to-neutral-700 dark:border-neutral-600 dark:hover:shadow-green-500/50"
+      >
+        <AnthropicIcon className="w-10 h-10 mb-2 text-neutral-700 dark:text-neutral-200" />
+        <p className="sm:text-lg text-md text-center font-bold text-neutral-700 dark:text-neutral-200">
+          Anthropic
         </p>
-        <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Sensible
+        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          Latest Model: Claude 3
         </p>
       </motion.div>
       <motion.div
         variants={second}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+        className="h-full w-1/3 rounded-2xl p-4 flex flex-col items-center justify-around shadow-2xl transition-shadow duration-300 
+                   bg-gradient-to-br from-neutral-100 to-neutral-50 border border-neutral-200 hover:shadow-blue-500/30 
+                   dark:from-neutral-800 dark:to-neutral-700 dark:border-neutral-600 dark:hover:shadow-blue-500/50"
       >
-        <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          I love angular, RSC, and Redux.
+        <OpenAIIcon className="w-12 h-12 mb-2 text-neutral-700 dark:text-neutral-200" />
+        <p className="sm:text-lg text-md text-center font-bold text-neutral-700 dark:text-neutral-200">
+          OpenAI
         </p>
-        <p className="border border-orange-500 bg-orange-100 dark:bg-orange-900/20 text-orange-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Helpless
+        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          Latest Model: GPT-4
         </p>
       </motion.div>
     </motion.div>
@@ -269,23 +263,23 @@ const SkeletonFive = () => {
     >
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2  items-start space-x-2 bg-white dark:bg-black"
+        className="flex flex-row rounded-2xl border border-neutral-200 dark:border-neutral-700 p-2  items-start space-x-2 bg-neutral-50 dark:bg-neutral-900"
       >
-        <img
+        <Image
           src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
           alt="avatar"
-          height="100"
-          width="100"
+          height={100}
+          width={100}
           className="rounded-full h-10 w-10"
         />
-        <p className="text-xs text-neutral-500">
-          There are a lot of cool framerworks out there like React, Angular,
-          Vue, Svelte that can make your life ....
+        <p className="text-xs text-neutral-500 dark:text-neutral-400">
+          "There are a lot of cool frameworks out there... React, Angular, Vue,
+          Svelte..."
         </p>
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
+        className="flex flex-row rounded-full border border-neutral-200 dark:border-neutral-700 p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-neutral-50 dark:bg-neutral-900"
       >
         <p className="text-xs text-neutral-500">Use PHP.</p>
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
@@ -297,9 +291,7 @@ const items = [
   {
     title: "Modern Website Development",
     description: (
-      <span className="text-sm">
-        Crafting custom, responsive websites with exceptional user experiences.
-      </span>
+      <span className="text-sm">Custom, responsive sites with great UX.</span>
     ),
     header: <SkeletonOne />,
     className: "md:col-span-1",
@@ -308,10 +300,7 @@ const items = [
   {
     title: "AI-Powered Solutions",
     description: (
-      <span className="text-sm">
-        Leveraging AI for intelligent automation and enhanced customer
-        interactions.
-      </span>
+      <span className="text-sm">Smart automation & enhanced interactions.</span>
     ),
     header: <SkeletonTwo />,
     className: "md:col-span-1",
@@ -320,33 +309,28 @@ const items = [
   {
     title: "SEO & Digital Marketing",
     description: (
-      <span className="text-sm">
-        Strategic SEO and marketing to boost your online presence and reach.
-      </span>
+      <span className="text-sm">Boost online presence and reach.</span>
     ),
     header: <SkeletonThree />,
     className: "md:col-span-1",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Seamless System Integrations",
+    title: "AI Integrations",
     description: (
       <span className="text-sm">
-        Automated booking systems and CRM integrations for operational
-        efficiency.
+        Integrate Gemini, Anthropic, OpenAI & more.
       </span>
     ),
     header: <SkeletonFour />,
     className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    icon: <IconCpu className="h-4 w-4 text-neutral-500" />,
   },
 
   {
     title: "Engaging UI/UX Design",
     description: (
-      <span className="text-sm">
-        Designing intuitive and visually appealing interfaces that users love.
-      </span>
+      <span className="text-sm">Intuitive and appealing user interfaces.</span>
     ),
     header: <SkeletonFive />,
     className: "md:col-span-1",

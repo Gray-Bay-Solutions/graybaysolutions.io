@@ -1,10 +1,16 @@
+// No "use client" here - this is a Server Component
+
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// React and context imports are removed from here
+import { monaSans } from "@/lib/fonts"; // Import monaSans
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+// ThemeProvider and DebugFontToggle are moved to ClientSetup
+import ClientSetup from "@/components/ClientSetup";
 
-const inter = Inter({ subsets: ["latin"] });
+// --- Font Definitions (exported for ClientSetup) ---
+// All font definitions and fontMap are removed from here
 
+// --- Metadata (can now be exported) ---
 export const metadata: Metadata = {
   title: "Gray Bay Solutions | Digital Business Solutions",
   description: "Your premier partner in navigating the digital landscape...",
@@ -25,6 +31,7 @@ export const metadata: Metadata = {
   },
 };
 
+// --- Root Layout ---
 export default function RootLayout({
   children,
 }: {
@@ -32,16 +39,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+      {/* Default font class applied here */}
+      <body className={monaSans.className}>
+        <ClientSetup>{children}</ClientSetup>
       </body>
     </html>
   );
 }
+
+// BodyStyler, DebugFontProvider, useDebugFont are moved to ClientSetup.tsx

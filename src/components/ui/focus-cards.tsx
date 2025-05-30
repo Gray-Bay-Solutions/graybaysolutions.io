@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 // Updated Card type to include description, bio, and an optional link
@@ -35,11 +36,13 @@ export const Card = React.memo(
           hovered !== null && !isHovered && "blur-sm scale-[0.98]"
         )}
       >
-        <img
+        <Image
           src={card.src}
           alt={card.title}
+          layout="fill"
+          objectFit="cover"
           className={cn(
-            "object-cover absolute inset-0 w-full h-full transition-transform duration-500",
+            "absolute inset-0 w-full h-full transition-transform duration-500",
             isHovered && "scale-105" // Control scale with isHovered
           )}
         />

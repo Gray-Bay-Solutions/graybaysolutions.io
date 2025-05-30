@@ -13,16 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  IconDeviceLaptop,
-  IconBuildingArch,
-  IconBriefcase,
-  IconUser,
-  IconHome,
-  IconDeviceMobile,
-  IconBulb,
-} from "@tabler/icons-react";
-import { IconProps, ServiceItem } from "@/types"; // Import types
+import { ServiceItem } from "@/types"; // Import types
 
 // Define a type for common icon props if needed for more specific typing
 // interface IconProps { ... } // MOVED TO src/types/index.ts
@@ -39,11 +30,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   services,
 }) => {
   return (
-    <section
-      id="services"
-      className="py-12 sm:py-16 md:py-20 bg-neutral-900/90 dark:bg-black/90 backdrop-blur-sm"
-    >
-      <div className="container mx-auto px-4">
+    <section id="services" className="pt-20 sm:pt-24 md:pt-28">
+      <div className="sm:pt-40 md:pt-44 lg:pt-48 container w-full px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

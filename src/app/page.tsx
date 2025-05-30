@@ -2,16 +2,7 @@
 
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import HeroSectionOne from "@/components/hero-section-demo-1";
-// import { BackgroundBeams } from "@/components/ui/background-beams"; // No longer using background beams directly here
-// TextGenerateEffect is not used for hero overlay anymore, but keep if needed elsewhere
-// import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-// import FeaturesSectionDemo1 from "@/components/features-section-demo-1"; // Not used
-// import { LayoutGrid } from "@/components/ui/layout-grid"; // Not used
-import { CTA } from "@/components/CTA";
-import { LeadForm } from "@/components/LeadForm";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-// import { Portfolio } from "@/components/Portfolio"; // Commenting out old Portfolio component
-// import { FocusCards } from "@/components/ui/focus-cards"; // No longer using FocusCards
 import {
   IconHome,
   IconMessage,
@@ -19,43 +10,12 @@ import {
   IconDeviceLaptop,
   IconBriefcase,
   IconBuildingArch,
-  IconBrandLinkedin,
-  IconBrandGithub,
-  IconMail,
-  IconExternalLink,
-  IconPhone,
-  IconMapPin,
-  IconWorldWww,
   IconDeviceMobile,
   IconBulb,
   IconSparkles,
-  IconBoxAlignRightFilled,
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-  IconAdjustments,
-  IconTools,
 } from "@tabler/icons-react";
-import Image from "next/image";
-import { WobbleCard } from "@/components/ui/wobble-card";
-import { cn, scrollToSection } from "@/lib/utils";
 import React from "react";
-import { HeroParallax } from "@/components/ui/hero-parallax";
 import { TeamSection } from "@/components/sections/TeamSection"; // Import the new section
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { motion } from "framer-motion";
 import { ServicesSection } from "@/components/sections/ServicesSection"; // Import the new section
 import { PortfolioSection } from "@/components/sections/PortfolioSection"; // Import the new section
 import { ContactSection } from "@/components/sections/ContactSection"; // Import the new section
@@ -213,13 +173,6 @@ const teamMembersData: TeamMember[] = [
 // Prepare data for FocusCards
 import portfolioDataFromFile from "@/data/projects.json";
 
-const focusCardItems = portfolioDataFromFile.map((project) => ({
-  title: project.title,
-  src: project.image,
-  description: project.description,
-  link: project.link,
-}));
-
 const portfolioData: Project[] = portfolioDataFromFile;
 
 // Prepare data for HeroParallax
@@ -234,7 +187,7 @@ const parallaxProductsData: ParallaxProduct[] = portfolioData.map(
 export default function NewLandingPage() {
   return (
     <AuroraBackground>
-      <div className="relative z-1 min-h-screen flex flex-col" id="home">
+      <div className="relative min-h-screen flex flex-col w-full" id="home">
         <FloatingNav navItems={navItems} className="top-5" />
 
         <main className="flex-grow">
