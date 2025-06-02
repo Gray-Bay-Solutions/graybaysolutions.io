@@ -6,7 +6,7 @@ const AnthropicIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
 }) => (
   <svg
     fill="currentColor"
-    fill-rule="evenodd"
+    fillRule="evenodd"
     style={{ flex: "none", lineHeight: "1" }}
     viewBox="0 0 24 24"
     width="1em"

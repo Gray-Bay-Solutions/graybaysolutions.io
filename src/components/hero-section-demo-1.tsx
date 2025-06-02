@@ -46,11 +46,15 @@ export default function HeroSectionOne({
     { name: "Supabase", logo: "/logos/supabase.svg", width: 80, height: 30 },
   ],
 }: HeroSectionOneProps) {
+  const words = headlineStart.split(" ");
+  const line1Text = words[0] || "";
+  const line2Text = words.slice(1).join(" ");
+
   return (
     <div className="relative text-white min-h-[calc(100vh-80px)] flex flex-col justify-center items-center py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full max-w-screen-xl mx-auto">
+      <div className="relative z-10 flex flex-col lg:flex-row items-start justify-between w-full max-w-screen-xl mx-auto">
         {/* Left Column: Text Content & CTAs */}
-        <div className="lg:w-1/2 lg:pr-10 xl:pr-16 text-center lg:text-left mb-12 lg:mb-0">
+        <div className="lg:w-1/2 lg:pl-8 xl:pl-16 text-left mb-12 lg:mb-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -63,16 +67,18 @@ export default function HeroSectionOne({
               </span>
             </div>
             <div className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 break-words text-black dark:text-white">
-              {headlineStart}
-              <span>
+              {line1Text && <div>{line1Text}</div>}
+              <div>{line2Text ? line2Text : <>&nbsp;</>}</div>
+              <div>
+                Made{" "}
                 <ContainerTextFlip
                   words={flipWords}
                   className="text-orange-500 dark:text-orange-400"
                 />
-              </span>
-              {headlineEnd}
+                {headlineEnd}
+              </div>
             </div>
-            <div className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 mb-10 max-w-xl mx-auto lg:mx-0">
+            <div className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 mb-10 max-w-xl">
               {subheading}
             </div>
           </motion.div>
@@ -81,7 +87,7 @@ export default function HeroSectionOne({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            className="flex flex-col sm:flex-row gap-4 justify-start"
           >
             <button
               onClick={() => scrollToSection(primaryCtaLink)}
@@ -101,14 +107,14 @@ export default function HeroSectionOne({
         </div>
 
         {/* Right Column: Infographic Bento Grid */}
-        <motion.div
+        {/* <motion.div
           className="lg:w-1/2 mt-40 lg:mt-0 flex justify-center items-center w-full"
           initial={{ opacity: 0, scale: 0.95, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <BentoGridThirdDemo />
-        </motion.div>
+        </motion.div> */}
       </div>
       <ScrollDownIndicator />
     </div>

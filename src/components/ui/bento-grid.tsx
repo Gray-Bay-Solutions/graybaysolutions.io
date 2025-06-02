@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 export const BentoGrid = ({
   className,
@@ -10,7 +11,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "mx-auto grid max-w-7xl grid-cols-1 gap-3 md:auto-rows-[14rem] md:grid-cols-3",
+        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[16rem] md:grid-cols-3",
         className
       )}
     >
@@ -32,32 +33,50 @@ export const BentoGridItem = ({
   header?: React.ReactNode;
   icon?: React.ReactNode;
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div
       className={cn(
-        "group/bento relative flex flex-col justify-start space-y-3 overflow-hidden rounded-2xl bg-neutral-50 dark:bg-neutral-950 p-4 shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] hover:bg-neutral-100 dark:hover:bg-neutral-900 hover:shadow-2xl",
+        "group/bento relative flex flex-col justify-start space-y-3 overflow-hidden rounded-2xl",
+        "bg-neutral-900 border border-neutral-800",
+        "p-4 md:p-5",
+        "shadow-md hover:shadow-lg",
+        "transition-all duration-300 ease-in-out",
+        "hover:bg-neutral-800/80 hover:border-neutral-700",
+        "hover:scale-[1.015]",
         className
       )}
     >
-      {header && (
+      {isMounted && header && (
         <div className="flex-grow flex items-center justify-center mb-2">
           {header}
         </div>
       )}
 
-      <div className="transition-all duration-200">
-        {icon && <div className="mb-1">{icon}</div>}
-        {title && (
-          <div className="mb-1 font-sans text-base font-semibold text-neutral-800 dark:text-neutral-50">
-            {title}
-          </div>
-        )}
-        {description && (
-          <div className="font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300/80 leading-snug">
-            {description}
-          </div>
-        )}
-      </div>
+      {isMounted && (icon || title || description) && (
+        <div className="transition-all duration-200 flex-grow flex flex-col justify-start">
+          {icon && (
+            <div className="mb-2 text-neutral-400 group-hover/bento:text-orange-400 transition-colors duration-300">
+              {icon}
+            </div>
+          )}
+          {title && (
+            <div className="mb-1 font-sans text-base md:text-lg font-semibold text-neutral-100 group-hover/bento:text-white transition-colors duration-300">
+              {title}
+            </div>
+          )}
+          {description && (
+            <div className="font-sans text-sm text-neutral-400 group-hover/bento:text-neutral-300 transition-colors duration-300 leading-snug flex-grow">
+              {description}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

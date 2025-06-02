@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -14,21 +14,45 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ServiceItem } from "@/types"; // Import types
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"; // Added import
+import { cn } from "@/lib/utils"; // Added import for cn
+import dynamic from "next/dynamic"; // Import dynamic
+import { BentoGridThirdDemo } from "../ui/bento-grid-2";
 
-// Define a type for common icon props if needed for more specific typing
-// interface IconProps { ... } // MOVED TO src/types/index.ts
+// Dynamically import Lottie component with SSR turned off
+const DynamicLottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+  // You can add a loading component here if needed
+  // loading: () => <p>Loading animation...</p>
+});
 
-// Define the type for a single service item
-// interface ServiceItem { ... } // MOVED TO src/types/index.ts
+// Placeholder Lottie animation data - REPLACE with your actual animation data or URL
+const placeholderLottieAnimation = null; // Set to null as the previous URL was invalid
 
 // Define the props for the ServicesSection component
 interface ServicesSectionProps {
   services: ServiceItem[];
 }
 
+const itemClassNames = [
+  "md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2", // Item 0: Website Development
+  "md:col-span-1 lg:col-span-1", // Item 1: SEO
+  "md:col-span-1 lg:col-span-1", // Item 2: Automated Booking
+  "md:col-span-2 lg:col-span-1", // Item 3: CRM Integration
+  "md:col-span-1 lg:col-span-1", // Item 4: AI-Powered Solutions
+  "md:col-span-1 lg:col-span-1", // Item 5: Mobile App Development
+  "md:col-span-2 lg:col-span-1", // Item 6: Custom Software Solutions
+];
+
 export const ServicesSection: React.FC<ServicesSectionProps> = ({
   services,
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <section id="services" className="pt-20 sm:pt-24 md:pt-28">
       <div className="sm:pt-40 md:pt-44 lg:pt-48 container w-full px-4">
@@ -54,47 +78,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           </p>
         </motion.div>
 
-        <ScrollArea className="w-full overflow-x-auto pb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-w-max md:min-w-0">
-            {services.map((service, i) => (
-              <motion.div
-                key={service.id || i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full bg-neutral-800/50 border-neutral-700/50 backdrop-blur-sm hover:bg-neutral-800/80 transition-colors duration-300 group">
-                  <CardHeader>
-                    <div className="mb-2">
-                      {React.cloneElement(service.icon, {
-                        size: 48,
-                        className:
-                          "text-orange-400 group-hover:text-orange-300 transition-colors duration-300",
-                      })}
-                    </div>
-                    <CardTitle className="text-lg sm:text-xl text-white group-hover:text-orange-200 transition-colors duration-300">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-neutral-400 group-hover:text-neutral-300 transition-colors duration-300">
-                      {service.description}
-                    </CardDescription>
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      variant="ghost"
-                      className="text-orange-400 hover:text-orange-300 hover:bg-orange-950/20 p-0"
-                    >
-                      Learn more
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </ScrollArea>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <BentoGridThirdDemo />
+        </motion.div>
       </div>
     </section>
   );

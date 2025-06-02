@@ -62,12 +62,12 @@ const navItems: NavItem[] = [
 ];
 
 // Hero text updated for FlipWords
-const heroHeadlineStart = "Digital Transformation Made ";
+const heroHeadlineStart = "Digital Transformation";
 const heroFlipWords = ["Simple", "Smart", "Seamless"];
 const heroHeadlineEnd = ""; // No text after the flipping word in this case
 const heroSubheading =
-  "We build elegant software solutions that help your business grow";
-const heroCtaText = "Start Your Project";
+  "We build intuitive software solutions that help your business grow";
+const heroCtaText = "Call for an interactive demo";
 const heroCtaLink = "#contact";
 const heroSecondaryCtaText = "View Our Work";
 const heroSecondaryCtaLink = "#portfolio";
@@ -185,6 +185,7 @@ const parallaxProductsData: ParallaxProduct[] = portfolioData.map(
 );
 
 export default function NewLandingPage() {
+  console.log("Services Data before rendering ServicesSection:", servicesData);
   return (
     <AuroraBackground>
       <div className="relative min-h-screen flex flex-col w-full" id="home">
