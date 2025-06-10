@@ -168,6 +168,13 @@ const teamMembersData: TeamMember[] = [
     bio: "Cornell alumn specializing in understanding client needs and full-stack development. Known for meticulous attention to detail and dedication to service, Marc cultivates strong partnerships to deliver impactful, precisely tailored technical solutions.",
     social: { github: "https://github.com/Msap96" },
   },
+  {
+    name: "Coleman Crozier",
+    role: "Co-Founder/PM",
+    image: "/team/cole.jpg",
+    bio: "A University of Florida alumnus, Coleman is a dedicated leader who excels at helping clients achieve their strategic goals. He builds strong, lasting relationships by deeply understanding client objectives and delivering tailored solutions that drive success.",
+    social: { linkedin: "https://www.linkedin.com/in/colemancrozier/" },
+  },
 ];
 
 // Prepare data for FocusCards
