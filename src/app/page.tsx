@@ -3,6 +3,7 @@
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import HeroSectionOne from "@/components/hero-section-demo-1";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { ChatWidget } from "@/components/ChatWidget";
 import {
   IconHome,
   IconMessage,
@@ -197,6 +198,7 @@ export default function NewLandingPage() {
     <AuroraBackground>
       <div className="relative min-h-screen flex flex-col w-full" id="home">
         <FloatingNav navItems={navItems} className="top-5" />
+        <ChatWidget />
 
         <main className="flex-grow">
           <HeroSectionOne
