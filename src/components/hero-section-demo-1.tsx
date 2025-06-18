@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { scrollToSection } from "@/lib/utils";
-import Image from "next/image";
-import { BentoGridThirdDemo } from "@/components/ui/bento-grid-2";
+import { BentoGridThirdDemo } from "@/components/bento-grid-2";
 import { ContainerTextFlip } from "./ui/container-text-flip";
 import { ScrollDownIndicator } from "@/components/ui/ScrollDownIndicator";
+import { cn } from "@/lib/utils";
 
 interface HeroSectionOneProps {
   headlineStart: string;

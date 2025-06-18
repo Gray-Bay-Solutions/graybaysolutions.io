@@ -1,57 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ServiceItem } from "@/types"; // Import types
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"; // Added import
-import { cn } from "@/lib/utils"; // Added import for cn
-import dynamic from "next/dynamic"; // Import dynamic
-import { BentoGridThirdDemo } from "../ui/bento-grid-2";
+import { BentoGridThirdDemo } from "../bento-grid-2";
 
-// Dynamically import Lottie component with SSR turned off
-const DynamicLottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-  // You can add a loading component here if needed
-  // loading: () => <p>Loading animation...</p>
-});
-
-// Placeholder Lottie animation data - REPLACE with your actual animation data or URL
-const placeholderLottieAnimation = null; // Set to null as the previous URL was invalid
-
-// Define the props for the ServicesSection component
-interface ServicesSectionProps {
-  services: ServiceItem[];
-}
-
-const itemClassNames = [
-  "md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2", // Item 0: Website Development
-  "md:col-span-1 lg:col-span-1", // Item 1: SEO
-  "md:col-span-1 lg:col-span-1", // Item 2: Automated Booking
-  "md:col-span-2 lg:col-span-1", // Item 3: CRM Integration
-  "md:col-span-1 lg:col-span-1", // Item 4: AI-Powered Solutions
-  "md:col-span-1 lg:col-span-1", // Item 5: Mobile App Development
-  "md:col-span-2 lg:col-span-1", // Item 6: Custom Software Solutions
-];
-
-export const ServicesSection: React.FC<ServicesSectionProps> = ({
-  services,
-}) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+export const ServicesSection: React.FC = () => {
+  useEffect(() => {}, []);
 
   return (
     <section id="services" className="pt-20 sm:pt-24 md:pt-28">

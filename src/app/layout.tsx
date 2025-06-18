@@ -6,6 +6,7 @@ import { monaSans } from "@/lib/fonts"; // Import monaSans
 import "./globals.css";
 // ThemeProvider and DebugFontToggle are moved to ClientSetup
 import ClientSetup from "@/components/ClientSetup";
+import { StagewiseToolbar } from "@stagewise/toolbar-next";
 
 // --- Font Definitions (exported for ClientSetup) ---
 // All font definitions and fontMap are removed from here
@@ -34,13 +35,18 @@ export const metadata: Metadata = {
 // --- Root Layout ---
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       {/* Default font class applied here */}
       <body className={monaSans.className}>
+        <StagewiseToolbar
+          config={{
+            plugins: [], // Add your custom plugins here
+          }}
+        />
         <ClientSetup>{children}</ClientSetup>
       </body>
     </html>

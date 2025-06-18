@@ -48,7 +48,6 @@ export const BentoGridItem = ({
         "shadow-md hover:shadow-lg",
         "transition-all duration-300 ease-in-out",
         "hover:bg-neutral-800/80 hover:border-neutral-700",
-        "hover:scale-[1.015]",
         className
       )}
     >
