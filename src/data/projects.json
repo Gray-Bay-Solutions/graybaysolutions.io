@@ -39,6 +39,15 @@
     "link": "https://nicentightcr.com"
   },
   {
+    "title": "Bank Fees Boat Charters",
+    "description": "Booking website for a boat charter company in Stamford, CT.",
+    "image": "/portfolio/bankfees.jpg",
+    "tags": ["TypeScript", "Next.js", "Tailwind"],
+    "industry": "Tourism",
+    "outcomes": ["Increased charter bookings", "Enhanced photo showcase"],
+    "link": "https://bank-fees.vercel.app/"
+  },
+  {
     "title": "PetPortraitAI",
     "description": "AI-powered mobile app for capturing perfect pet photos with intelligent sound systems.",
     "image": "/portfolio/petportrait.jpg",

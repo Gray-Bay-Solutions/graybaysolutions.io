@@ -52,9 +52,10 @@ export const Footer: React.FC<FooterProps> = ({ navItems }) => {
             <h3 className="text-xl font-bold text-white mb-4">Contact</h3>
             <ul className="space-y-2 text-neutral-400">
               {/* TODO: Replace with actual contact details or make dynamic */}
-              <li>info@graybaysolutions.com</li>
-              <li>(123) 456-7890</li>
-              <li>123 Tech Lane, Digital City</li>
+              <li>info@graybaysolutions.io</li>
+              {/* TODO: Add AI phone number bot */}
+              {/* <li>(786) 470-0520</li> */}
+              <li>Indialantic, FL</li>
             </ul>
           </div>
         </div>
